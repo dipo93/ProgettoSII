@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.List;
 
 import main_package.Auth;
@@ -12,6 +13,8 @@ import main_package.Auth;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.services.youtube.YouTube;
+import com.google.api.services.youtube.model.Channel;
+import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.api.services.youtube.model.Comment;
 import com.google.api.services.youtube.model.CommentSnippet;
 import com.google.api.services.youtube.model.CommentThread;
@@ -63,6 +66,11 @@ public class CommentHandling {
             // Retrieve the video ID that the user is commenting to.
             String videoId = getVideoId();
             System.out.println("You chose " + videoId + " to subscribe.");
+            
+            
+            
+            
+            
 
 
             // All the available methods are used in sequence just for the sake
@@ -103,6 +111,12 @@ public class CommentHandling {
                     System.out.println("\n-------------------------------------------------------------\n");
                     i++;
                     
+                    
+                    //questa cosa va usata durante la stampa dei commenti, il parametro è l'id del canale
+//                    String subscribers = getChannelSubscribers("a");
+                    
+                    
+                    
                     b.write(snippet.toPrettyString() + ",\n\n");
                     
                     // Prints the replies
@@ -142,6 +156,44 @@ public class CommentHandling {
             t.printStackTrace();
         }
     }
+    
+    
+    private static String getChannelSubscribers(String channeId) {
+    
+        try {
+            // Call the YouTube Data API's channels.list method to
+            // retrieve channels.
+            ChannelListResponse channelListResponse = youtube.channels().list("statistics")
+            		.setId(channeId).execute();
+            
+            List<Channel> channelList = channelListResponse.getItems();
+            
+            if (channelList.isEmpty())
+            	return ("Can't find a channel with ID: " + channeId);
+            
+            Channel channel = channelList.get(0);
+            BigInteger subscribers = channel.getStatistics().getSubscriberCount();
+            
+            return ("This channel has " + subscribers + " subscribers");
+        
+        
+        } catch (GoogleJsonResponseException e) {
+//            System.err.println("GoogleJsonResponseException code: " + e.getDetails().getCode()
+//                    + " : " + e.getDetails().getMessage());
+            e.printStackTrace();
+            return ("GoogleJsonResponseException code: " + e.getDetails().getCode()
+                    + " : " + e.getDetails().getMessage());
+        } catch (IOException e) {
+//            System.err.println("IOException: " + e.getMessage());
+            e.printStackTrace();
+            return ("IOException: " + e.getMessage());
+        } catch (Throwable t) {
+//            System.err.println("Throwable: " + t.getMessage());
+            t.printStackTrace();
+            return ("Throwable: " + t.getMessage());
+        }
+    }
+    
 
     /*
      * Prompt the user to enter a video ID. Then return the ID.
