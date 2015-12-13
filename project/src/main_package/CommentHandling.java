@@ -16,23 +16,14 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.api.services.youtube.model.Comment;
-import com.google.api.services.youtube.model.CommentSnippet;
 import com.google.api.services.youtube.model.CommentThread;
 import com.google.api.services.youtube.model.CommentThreadListResponse;
+import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoListResponse;
 import com.google.common.collect.Lists;
 
 /**
- * This sample creates and manages comments by:
- *
- * 1. Retrieving the top-level comments for a video via "commentThreads.list" method.
- * 2. Replying to a comment thread via "comments.insert" method.
- * 3. Retrieving comment replies via "comments.list" method.
- * 4. Updating an existing comment via "comments.update" method.
- * 5. Sets moderation status of an existing comment via "comments.setModerationStatus" method.
- * 6. Marking a comment as spam via "comments.markAsSpam" method.
- * 7. Deleting an existing comment via "comments.delete" method.
- *
- * @author Ibrahim Ulukaya
+ * This sample creates and manages comments
  */
 public class CommentHandling {
 
@@ -67,14 +58,10 @@ public class CommentHandling {
             String videoId = getVideoId();
             System.out.println("You chose " + videoId + " to subscribe.");
             
-            
-            
-            
-            
-
-
-            // All the available methods are used in sequence just for the sake
-            // of an example.
+            //gets the resource Video, to retrieve more informations
+            VideoListResponse videoListResponse = youtube.videos().
+                    list("snippet").setId(videoId).execute();
+            Video video = videoListResponse.getItems().get(0);
 
             // Call the YouTube Data API's commentThreads.list method to
             // retrieve video comment threads.
@@ -86,6 +73,7 @@ public class CommentHandling {
             
             List<CommentThread> videoComments = videoCommentsListResponse.getItems();
             
+            //getting all the comments
             while(nextpage != null){
             	videoCommentsListResponse = youtube.commentThreads().list("snippet, replies")
                         .setVideoId(videoId).setTextFormat("plainText").setMaxResults(100L).
@@ -97,41 +85,39 @@ public class CommentHandling {
             if (videoComments.isEmpty()) {
                 System.out.println("Can't get video comments.");
             } else {
+            	//comments.txt is a file where we will store the comments in a JSON like format
             	FileWriter w = new FileWriter("comments.txt", true);
             	BufferedWriter b = new BufferedWriter(w);
+            	
+            	//comment retrieved counter
             	int i = 0;
             	
-                // Print information from the API response.
+                // Print and store information from the API response.
                 System.out.println("\n================== Returned Video Comments ==================\n");
+                
                 for (CommentThread videoComment : videoComments) {
-                    CommentSnippet snippet = videoComment.getSnippet().getTopLevelComment().getSnippet();
-//                    System.out.println("  - Author: " + snippet.getAuthorDisplayName());
-//                    System.out.println("  - Comment: " + snippet.getTextDisplay());
-                    System.out.println(snippet.toPrettyString());
+                	
+                    printVideoComment(videoComment, video);
+                    
+                    storeVideoComment(videoComment, video, b);
+                    
                     System.out.println("\n-------------------------------------------------------------\n");
                     i++;
                     
-                    
-                    //questa cosa va usata durante la stampa dei commenti, il parametro è l'id del canale
-//                    String subscribers = getChannelSubscribers("a");
-                    
-                    
-                    
-                    b.write(snippet.toPrettyString() + ",\n\n");
-                    
-                    // Prints the replies
+                    // Prints and stores replies
                     if(videoComment.getReplies() != null){
+                    	
                     	List<Comment> videoReplies = videoComment.getReplies().getComments();
                     	
                     	for(Comment videoReply : videoReplies){
-                    		CommentSnippet snippet_r = videoReply.getSnippet();
-//                    		  System.out.println("  - Author: " + snippet_r.getAuthorDisplayName());
-//                            System.out.println("  - Reply: " + snippet_r.getTextDisplay());
-                    		System.out.println(snippet_r.toPrettyString());
-                            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+                    		
+                    		printVideoCommentReply(videoReply, video);
+                    		
+                    		storeVideoCommentReply(videoReply, video, b);
+                            
+                    		System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                             i++;
                             
-                            b.write(snippet_r.toPrettyString() + ",\n\n");
                     	}
                     	
                     } // end if
@@ -156,8 +142,135 @@ public class CommentHandling {
             t.printStackTrace();
         }
     }
+
+    /*
+     * Prompt the user to enter a video ID. Then return the ID.
+     */
+    private static String getVideoId() throws IOException {
+
+        String videoId = "";
+
+        System.out.print("Please enter a video id: ");
+        BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
+        videoId = bReader.readLine();
+
+        return videoId;
+    }
+    
+    /*
+     * Prints on the console all the informations about the comment
+     * */
+    private static void printVideoComment(CommentThread videoComment, Video video) throws IOException {
+    	System.out.println("Author Channel ID: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorChannelId().getValue());
+    	System.out.println("Author Display Name: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorDisplayName());
+    	System.out.println("Author Channel URL: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorChannelUrl());
+    	System.out.println("Channel Subscribers Count: "+ getChannelSubscribers(videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorChannelId().getValue()));
+    	System.out.println("Video ID: "+videoComment.getSnippet().getVideoId());
+    	System.out.println("Text Display: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getTextDisplay());
+    	System.out.println("Like Count: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getLikeCount());
+    	System.out.println("Reply Count: "+videoComment.getSnippet().getTotalReplyCount());
+    	System.out.println("Published At: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getPublishedAt());
+    	System.out.println("Updated At: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getUpdatedAt());
+        System.out.println("Video Title: " + video.getSnippet().getTitle());
+        System.out.println("Video Author Display Name: " + video.getSnippet().getChannelTitle());
+        System.out.println("Video Author Channel ID: " + video.getSnippet().getChannelId());
+        System.out.println("Video Description: " + video.getSnippet().getDescription());
+        System.out.println("Video Published At: " + video.getSnippet().getPublishedAt());
+        System.out.print("Video Tags: ");
+        for (String tag : video.getSnippet().getTags()) {
+        	System.out.print(tag + " ");
+        }
+        System.out.println();
+        }
+    
+    /*
+     * Stores with BufferedWriter b all the informations about the comment in the .txt
+     * */
+    private static void storeVideoComment(CommentThread videoComment, Video video, BufferedWriter b) throws IOException {
+    	b.write("{\n");
+    	b.write("\"isReply\" : \"false\",\n");
+    	b.write("\"authorChannelId\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorChannelId().getValue()+"\",\n");
+    	b.write("\"authorDisplayName\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorDisplayName()+"\",\n");
+    	b.write("\"authorChannelUrl\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorChannelUrl()+"\",\n");
+    	b.write("\"channelSubscribersCount\" : \""+ getChannelSubscribers(videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorChannelId().getValue())+"\",\n");
+    	b.write("\"videoId\" : \""+videoComment.getSnippet().getVideoId()+"\",\n");
+    	b.write("\"textDisplay\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getTextDisplay()+"\",\n");
+    	b.write("\"likeCount\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getLikeCount()+"\",\n");
+    	b.write("\"replyCount\" : \""+videoComment.getSnippet().getTotalReplyCount()+"\",\n");
+    	b.write("\"publishedAt\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getPublishedAt()+"\",\n");
+    	b.write("\"updatedAt\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getUpdatedAt()+"\",\n");
+    	b.write("\"videoTitle\" : \"" + video.getSnippet().getTitle()+"\",\n");
+    	b.write("\"videoAuthorDisplayName\" : \"" + video.getSnippet().getChannelTitle()+"\",\n");
+    	b.write("\"videoAuthorChannelId\" : \"" + video.getSnippet().getChannelId()+"\",\n");
+    	b.write("\"videoDescription\" : \"" + video.getSnippet().getDescription()+"\",\n");
+    	b.write("\"videoPublishedAt\" : \"" + video.getSnippet().getPublishedAt()+"\",\n");
+    	b.write("\"videoTags\" : \"");
+        for (String tag : video.getSnippet().getTags()) {
+        	b.write(tag + " ");
+        }
+        b.write("\",\n");
+    	b.write("},\n\n");
+    }
+    
+    /*
+     * Prints on the console all the informations about the comment reply
+     * */
+    private static void printVideoCommentReply(Comment videoCommentReply, Video video) throws IOException {
+    	System.out.println("Author Channel ID: "+videoCommentReply.getSnippet().getAuthorChannelId().getValue());
+    	System.out.println("Author Display Name: "+videoCommentReply.getSnippet().getAuthorDisplayName());
+    	System.out.println("Author Channel URL: "+videoCommentReply.getSnippet().getAuthorChannelUrl());
+    	System.out.println("Channel Subscribers Count: "+ getChannelSubscribers(videoCommentReply.getSnippet().getAuthorChannelId().getValue()));
+    	System.out.println("Video ID: "+videoCommentReply.getSnippet().getVideoId());
+    	System.out.println("Parent ID: "+videoCommentReply.getSnippet().getParentId());
+    	System.out.println("Text Display: "+videoCommentReply.getSnippet().getTextDisplay());
+    	System.out.println("Like Count: "+videoCommentReply.getSnippet().getLikeCount());
+    	System.out.println("Published At: "+videoCommentReply.getSnippet().getPublishedAt());
+    	System.out.println("Updated At: "+videoCommentReply.getSnippet().getUpdatedAt());
+        System.out.println("Video Title: " + video.getSnippet().getTitle());
+        System.out.println("Video Author Display Name: " + video.getSnippet().getChannelTitle());
+        System.out.println("Video Author Channel ID: " + video.getSnippet().getChannelId());
+        System.out.println("Video Description: " + video.getSnippet().getDescription());
+        System.out.println("Video Published At: " + video.getSnippet().getPublishedAt());
+        System.out.print("Video Tags: ");
+        for (String tag : video.getSnippet().getTags()) {
+        	System.out.print(tag + " ");
+        }
+        System.out.println();
+        }
+    
+    /*
+     * Stores with BufferedWriter b all the informations about the comment reply in the .txt
+     * */
+    private static void storeVideoCommentReply(Comment videoCommentReply, Video video, BufferedWriter b) throws IOException {
+    	b.write("{\n");
+    	b.write("\"isReply\" : \"true\",\n");
+    	b.write("\"authorChannelId\" : \""+videoCommentReply.getSnippet().getAuthorChannelId().getValue()+"\",\n");
+    	b.write("\"authorDisplayName\" : \""+videoCommentReply.getSnippet().getAuthorDisplayName()+"\",\n");
+    	b.write("\"authorChannelUrl\" : \""+videoCommentReply.getSnippet().getAuthorChannelUrl()+"\",\n");
+    	b.write("\"channelSubscribersCount\" : \""+ getChannelSubscribers(videoCommentReply.getSnippet().getAuthorChannelId().getValue())+"\",\n");
+    	b.write("\"videoId\" : \""+videoCommentReply.getSnippet().getVideoId()+"\",\n");
+    	b.write("\"parentId\" : \""+videoCommentReply.getSnippet().getParentId()+"\",\n");
+    	b.write("\"textDisplay\" : \""+videoCommentReply.getSnippet().getTextDisplay()+"\",\n");
+    	b.write("\"likeCount\" : \""+videoCommentReply.getSnippet().getLikeCount()+"\",\n");
+    	b.write("\"publishedAt\" : \""+videoCommentReply.getSnippet().getPublishedAt()+"\",\n");
+    	b.write("\"updatedAt\" : \""+videoCommentReply.getSnippet().getUpdatedAt()+"\",\n");
+    	b.write("\"videoTitle\" : \"" + video.getSnippet().getTitle()+"\",\n");
+    	b.write("\"videoAuthorDisplayName\" : \"" + video.getSnippet().getChannelTitle()+"\",\n");
+    	b.write("\"videoAuthorChannelId\" : \"" + video.getSnippet().getChannelId()+"\",\n");
+    	b.write("\"videoDescription\" : \"" + video.getSnippet().getDescription()+"\",\n");
+    	b.write("\"videoPublishedAt\" : \"" + video.getSnippet().getPublishedAt()+"\",\n");
+    	b.write("\"videoTags\" : \"");
+        for (String tag : video.getSnippet().getTags()) {
+        	b.write(tag + " ");
+        }
+        b.write("\",\n");
+    	b.write("},\n\n");
+    }
     
     
+    /**
+     * With the channelId, returns a String with the subscribers' number
+     */
     private static String getChannelSubscribers(String channeId) {
     
         try {
@@ -174,140 +287,25 @@ public class CommentHandling {
             Channel channel = channelList.get(0);
             BigInteger subscribers = channel.getStatistics().getSubscriberCount();
             
-            return ("This channel has " + subscribers + " subscribers");
+            return subscribers.toString();
         
         
         } catch (GoogleJsonResponseException e) {
-//            System.err.println("GoogleJsonResponseException code: " + e.getDetails().getCode()
-//                    + " : " + e.getDetails().getMessage());
+           System.err.println("GoogleJsonResponseException code: " + e.getDetails().getCode()
+                    + " : " + e.getDetails().getMessage());
             e.printStackTrace();
             return ("GoogleJsonResponseException code: " + e.getDetails().getCode()
                     + " : " + e.getDetails().getMessage());
         } catch (IOException e) {
-//            System.err.println("IOException: " + e.getMessage());
+            System.err.println("IOException: " + e.getMessage());
             e.printStackTrace();
             return ("IOException: " + e.getMessage());
         } catch (Throwable t) {
-//            System.err.println("Throwable: " + t.getMessage());
+            System.err.println("Throwable: " + t.getMessage());
             t.printStackTrace();
             return ("Throwable: " + t.getMessage());
         }
     }
     
-
-    /*
-     * Prompt the user to enter a video ID. Then return the ID.
-     */
-    private static String getVideoId() throws IOException {
-
-        String videoId = "";
-
-        System.out.print("Please enter a video id: ");
-        BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        videoId = bReader.readLine();
-
-        return videoId;
-    }
-
-    /*
-     * Prompt the user to enter text for a comment. Then return the text.
-     */
-/*    private static String getText() throws IOException {
-
-        String text = "";
-
-        System.out.print("Please enter a comment text: ");
-        BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        text = bReader.readLine();
-
-        if (text.length() < 1) {
-            // If nothing is entered, defaults to "YouTube For Developers."
-            text = "YouTube For Developers.";
-        }
-        return text;
-    }*/
-    
-    
-    /*
-    
-    // Will use this thread as parent to new reply.
-    String parentId = firstComment.getId();
-
-    // Create a comment snippet with text.
-    CommentSnippet commentSnippet = new CommentSnippet();
-    commentSnippet.setTextOriginal(text);
-    commentSnippet.setParentId(parentId);
-
-    // Create a comment with snippet.
-    Comment comment = new Comment();
-    comment.setSnippet(commentSnippet);
-    
-    // Call the YouTube Data API's comments.insert method to reply
-    // to a comment.
-    // (If the intention is to create a new top-level comment,
-    // commentThreads.insert
-    // method should be used instead.)
-    Comment commentInsertResponse = youtube.comments().insert("snippet", comment)
-            .execute();
-
-    // Print information from the API response.
-    System.out
-            .println("\n================== Created Comment Reply ==================\n");
-    CommentSnippet snippet = commentInsertResponse.getSnippet();
-    System.out.println("  - Author: " + snippet.getAuthorDisplayName());
-    System.out.println("  - Comment: " + snippet.getTextDisplay());
-    System.out
-            .println("\n-------------------------------------------------------------\n");
-
-    // Call the YouTube Data API's comments.list method to retrieve
-    // existing comment replies.
-    CommentListResponse commentsListResponse = youtube.comments().list("snippet")
-            .setParentId(parentId).setTextFormat("plainText").execute();
-    List<Comment> comments = commentsListResponse.getItems();
-
-    if (comments.isEmpty()) {
-        System.out.println("Can't get comment replies.");
-    } else {
-        // Print information from the API response.
-        System.out
-                .println("\n================== Returned Comment Replies ==================\n");
-        for (Comment commentReply : comments) {
-            snippet = commentReply.getSnippet();
-            System.out.println("  - Author: " + snippet.getAuthorDisplayName());
-            System.out.println("  - Comment: " + snippet.getTextDisplay());
-            System.out
-                    .println("\n-------------------------------------------------------------\n");
-        }
-        Comment firstCommentReply = comments.get(0);
-        firstCommentReply.getSnippet().setTextOriginal("updated");
-        Comment commentUpdateResponse = youtube.comments()
-                .update("snippet", firstCommentReply).execute();
-        // Print information from the API response.
-        System.out
-                .println("\n================== Updated Video Comment ==================\n");
-        snippet = commentUpdateResponse.getSnippet();
-        System.out.println("  - Author: " + snippet.getAuthorDisplayName());
-        System.out.println("  - Comment: " + snippet.getTextDisplay());
-        System.out
-                .println("\n-------------------------------------------------------------\n");
-
-        // Call the YouTube Data API's comments.setModerationStatus
-        // method to set moderation
-        // status of an existing comment.
-        youtube.comments().setModerationStatus(firstCommentReply.getId(), "published");
-        System.out.println("  -  Changed comment status to published: "
-                + firstCommentReply.getId());
-
-        // Call the YouTube Data API's comments.markAsSpam method to
-        // mark an existing comment as spam.
-        youtube.comments().markAsSpam(firstCommentReply.getId());
-        System.out.println("  -  Marked comment as spam: " + firstCommentReply.getId());
-
-        // Call the YouTube Data API's comments.delete method to
-        // delete an existing comment.
-        youtube.comments().delete(firstCommentReply.getId());
-        System.out
-                .println("  -  Deleted comment as spam: " + firstCommentReply.getId());
-    }*/
     
 }
