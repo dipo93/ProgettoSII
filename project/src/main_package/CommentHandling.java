@@ -66,7 +66,7 @@ public class CommentHandling {
             // Call the YouTube Data API's commentThreads.list method to
             // retrieve video comment threads.
             CommentThreadListResponse videoCommentsListResponse = youtube.commentThreads()
-                    .list("snippet, replies").setVideoId(videoId).setTextFormat("plainText")
+            		.list("snippet, replies").setVideoId(videoId).setTextFormat("plainText")
                     .setMaxResults(100L).setOrder("relevance").execute();
             
             String nextpage = videoCommentsListResponse.getNextPageToken();
@@ -86,8 +86,10 @@ public class CommentHandling {
                 System.out.println("Can't get video comments.");
             } else {
             	//comments.txt is a file where we will store the comments in a JSON like format
-            	FileWriter w = new FileWriter("comments.txt", true);
-            	BufferedWriter b = new BufferedWriter(w);
+            	FileWriter commentsTxt = new FileWriter("comments.txt", true);
+            	FileWriter commentsProcessedTxt = new FileWriter("commentsProcessed.txt", true);
+            	BufferedWriter c = new BufferedWriter(commentsTxt);
+            	BufferedWriter cp = new BufferedWriter(commentsProcessedTxt);
             	
             	//comment retrieved counter
             	int i = 0;
@@ -99,7 +101,9 @@ public class CommentHandling {
                 	
                     printVideoComment(videoComment, video);
                     
-                    storeVideoComment(videoComment, video, b);
+                    storeVideoComment(videoComment, video, c);
+                    
+                    processVideoComment(videoComment, video, cp);
                     
                     System.out.println("\n-------------------------------------------------------------\n");
                     i++;
@@ -113,7 +117,9 @@ public class CommentHandling {
                     		
                     		printVideoCommentReply(videoReply, video);
                     		
-                    		storeVideoCommentReply(videoReply, video, b);
+                    		storeVideoCommentReply(videoReply, video, c);
+                    		
+                    		processVideoCommentReply(videoReply, video, cp);
                             
                     		System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                             i++;
@@ -125,7 +131,8 @@ public class CommentHandling {
                 } //end for
                 
                 System.out.println(i + " comments and replies retrieved");
-                b.close();
+                c.close();
+                cp.close();
                 
             } //end else
             
@@ -167,6 +174,7 @@ public class CommentHandling {
     	System.out.println("Channel Subscribers Count: "+ getChannelSubscribers(videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorChannelId().getValue()));
     	System.out.println("Video ID: "+videoComment.getSnippet().getVideoId());
     	System.out.println("Text Display: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getTextDisplay());
+    	System.out.println("Moderation Status: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getModerationStatus());
     	System.out.println("Like Count: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getLikeCount());
     	System.out.println("Reply Count: "+videoComment.getSnippet().getTotalReplyCount());
     	System.out.println("Published At: "+videoComment.getSnippet().getTopLevelComment().getSnippet().getPublishedAt());
@@ -188,6 +196,7 @@ public class CommentHandling {
      * */
     private static void storeVideoComment(CommentThread videoComment, Video video, BufferedWriter b) throws IOException {
     	b.write("{\n");
+    	b.write("\"moderationStatus\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getModerationStatus()+"\",\n");
     	b.write("\"isReply\" : \"false\",\n");
     	b.write("\"authorChannelId\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorChannelId().getValue()+"\",\n");
     	b.write("\"authorDisplayName\" : \""+videoComment.getSnippet().getTopLevelComment().getSnippet().getAuthorDisplayName()+"\",\n");
@@ -212,6 +221,12 @@ public class CommentHandling {
     	b.write("},\n\n");
     }
     
+    /* process comment data to create a json in the text with all the features needed
+     */
+    private static void processVideoComment(CommentThread videoComment, Video video, BufferedWriter b) throws IOException {
+    	
+    }
+    
     /*
      * Prints on the console all the informations about the comment reply
      * */
@@ -223,6 +238,7 @@ public class CommentHandling {
     	System.out.println("Video ID: "+videoCommentReply.getSnippet().getVideoId());
     	System.out.println("Parent ID: "+videoCommentReply.getSnippet().getParentId());
     	System.out.println("Text Display: "+videoCommentReply.getSnippet().getTextDisplay());
+    	System.out.println("Moderation Status: "+videoCommentReply.getSnippet().getModerationStatus());
     	System.out.println("Like Count: "+videoCommentReply.getSnippet().getLikeCount());
     	System.out.println("Published At: "+videoCommentReply.getSnippet().getPublishedAt());
     	System.out.println("Updated At: "+videoCommentReply.getSnippet().getUpdatedAt());
@@ -244,6 +260,7 @@ public class CommentHandling {
     private static void storeVideoCommentReply(Comment videoCommentReply, Video video, BufferedWriter b) throws IOException {
     	b.write("{\n");
     	b.write("\"isReply\" : \"true\",\n");
+    	b.write("\"moderationStatus\" : \""+videoCommentReply.getSnippet().getModerationStatus()+"\",\n");
     	b.write("\"authorChannelId\" : \""+videoCommentReply.getSnippet().getAuthorChannelId().getValue()+"\",\n");
     	b.write("\"authorDisplayName\" : \""+videoCommentReply.getSnippet().getAuthorDisplayName()+"\",\n");
     	b.write("\"authorChannelUrl\" : \""+videoCommentReply.getSnippet().getAuthorChannelUrl()+"\",\n");
@@ -265,6 +282,14 @@ public class CommentHandling {
         }
         b.write("\",\n");
     	b.write("},\n\n");
+    }
+    
+    /*
+     * process reply data to create a json in the text with all the features needed
+     * */
+    
+    private static void processVideoCommentReply(Comment videoCommentReply, Video video, BufferedWriter b) throws IOException {
+    	
     }
     
     
