@@ -5,13 +5,19 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+//import java.math.BigInteger;
 import java.util.List;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 import main_package.Auth;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+//import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.YouTube;
+//import com.google.api.services.youtube.model.Channel;
+//import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.api.services.youtube.model.Comment;
 import com.google.api.services.youtube.model.CommentThread;
 import com.google.api.services.youtube.model.CommentThreadListResponse;
@@ -29,7 +35,7 @@ public class CommentHandling {
      * YouTube Data API requests.
      */
     private static YouTube youtube;
-
+    
     /**
      * List, reply to comment threads; list, update, moderate, mark and delete
      * replies.
@@ -137,7 +143,6 @@ public class CommentHandling {
             System.err.println("GoogleJsonResponseException code: " + e.getDetails().getCode()
                     + " : " + e.getDetails().getMessage());
             e.printStackTrace();
-
         } catch (IOException e) {
             System.err.println("IOException: " + e.getMessage());
             e.printStackTrace();
@@ -160,7 +165,7 @@ public class CommentHandling {
 
         return videoId;
     }
-
+    
     /*
      * Prints on the console all the informations about the comment
      * */
@@ -170,14 +175,12 @@ public class CommentHandling {
     	System.out.println("Author Channel URL: "+videoComment.getSnippet().getAuthorChannelUrl());
     	System.out.println("Channel Subscribers Count: "+ FeatureProcessing.getChannelSubscribers(youtube, videoComment.getSnippet().getAuthorChannelId().getValue()));
     	System.out.println("Video ID: "+videoComment.getSnippet().getVideoId());
-    	//if the comment is not a reply, the following entry will be "null"
     	System.out.println("Parent ID: "+videoComment.getSnippet().getParentId());
     	System.out.println("Text Display: "+videoComment.getSnippet().getTextDisplay());
     	System.out.println("Moderation Status: "+videoComment.getSnippet().getModerationStatus());
     	System.out.println("Like Count: "+videoComment.getSnippet().getLikeCount());
-    	if (cThread != null) {
+    	if(cThread != null)
     		System.out.println("Reply Count: "+cThread.getSnippet().getTotalReplyCount());
-    	}
     	System.out.println("Published At: "+videoComment.getSnippet().getPublishedAt());
     	System.out.println("Updated At: "+videoComment.getSnippet().getUpdatedAt());
         System.out.println("Video Title: " + video.getSnippet().getTitle());
@@ -197,25 +200,21 @@ public class CommentHandling {
      * */
     private static void storeVideoComment(Comment videoComment, Video video, CommentThread cThread, BufferedWriter b) throws IOException {
     	b.write("{\n");
-    	if (cThread != null) {
+    	if(cThread != null)
     		b.write("\"isReply\" : \"false\",\n");
-    	}
-    	else {
+    	else
     		b.write("\"isReply\" : \"true\",\n");
-    	}
     	b.write("\"moderationStatus\" : \""+videoComment.getSnippet().getModerationStatus()+"\",\n");
     	b.write("\"authorChannelId\" : \""+videoComment.getSnippet().getAuthorChannelId().getValue()+"\",\n");
     	b.write("\"authorDisplayName\" : \""+videoComment.getSnippet().getAuthorDisplayName()+"\",\n");
     	b.write("\"authorChannelUrl\" : \""+videoComment.getSnippet().getAuthorChannelUrl()+"\",\n");
     	b.write("\"channelSubscribersCount\" : \""+ FeatureProcessing.getChannelSubscribers(youtube, videoComment.getSnippet().getAuthorChannelId().getValue())+"\",\n");
     	b.write("\"videoId\" : \""+videoComment.getSnippet().getVideoId()+"\",\n");
-    	//parentId is null if the videoComment isn't a reply
     	b.write("\"parentId\" : \""+videoComment.getSnippet().getParentId()+"\",\n");
     	b.write("\"textDisplay\" : \""+videoComment.getSnippet().getTextDisplay()+"\",\n");
     	b.write("\"likeCount\" : \""+videoComment.getSnippet().getLikeCount()+"\",\n");
-    	if (cThread != null) {
+    	if(cThread != null)
     		b.write("\"replyCount\" : \""+cThread.getSnippet().getTotalReplyCount()+"\",\n");
-    	}
     	b.write("\"publishedAt\" : \""+videoComment.getSnippet().getPublishedAt()+"\",\n");
     	b.write("\"updatedAt\" : \""+videoComment.getSnippet().getUpdatedAt()+"\",\n");
     	b.write("\"videoTitle\" : \"" + video.getSnippet().getTitle()+"\",\n");
@@ -230,4 +229,6 @@ public class CommentHandling {
         b.write("\",\n");
     	b.write("},\n\n");
     }
+    
+
 }
