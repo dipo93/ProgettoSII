@@ -1,0 +1,144 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.unsupervised.attribute.Remove-R1-7,9,11-16,18,20
+Instances:    1518
+Attributes:   6
+              daysInterval
+              mentionTags
+              percentageTitleWordsInComment
+              percentageCapsLock
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+blackWords <= 1
+|   percentageCapsLock <= 14.354114
+|   |   blackWords <= 0.03919: n (307.0/17.0)
+|   |   blackWords > 0.03919
+|   |   |   mentionTags <= 0.180123
+|   |   |   |   percentageTitleWordsInComment <= 1.50184
+|   |   |   |   |   percentageTitleWordsInComment <= 0.154223
+|   |   |   |   |   |   percentageCapsLock <= 0.139729: y (15.0/2.0)
+|   |   |   |   |   |   percentageCapsLock > 0.139729
+|   |   |   |   |   |   |   blackWords <= 0.983843: y (66.0/30.0)
+|   |   |   |   |   |   |   blackWords > 0.983843: n (61.0/12.0)
+|   |   |   |   |   percentageTitleWordsInComment > 0.154223: y (10.0/1.0)
+|   |   |   |   percentageTitleWordsInComment > 1.50184
+|   |   |   |   |   percentageCapsLock <= 3.446727
+|   |   |   |   |   |   percentageCapsLock <= 2.979099: n (9.0)
+|   |   |   |   |   |   percentageCapsLock > 2.979099: y (8.0/2.0)
+|   |   |   |   |   percentageCapsLock > 3.446727: n (23.0)
+|   |   |   mentionTags > 0.180123
+|   |   |   |   daysInterval <= 106.543047: n (46.0)
+|   |   |   |   daysInterval > 106.543047
+|   |   |   |   |   percentageCapsLock <= 11.563149
+|   |   |   |   |   |   mentionTags <= 0.343551
+|   |   |   |   |   |   |   daysInterval <= 1083.515102: y (3.0)
+|   |   |   |   |   |   |   daysInterval > 1083.515102: n (2.0)
+|   |   |   |   |   |   mentionTags > 0.343551: n (9.0)
+|   |   |   |   |   percentageCapsLock > 11.563149: y (4.0)
+|   percentageCapsLock > 14.354114
+|   |   blackWords <= 0
+|   |   |   percentageTitleWordsInComment <= 10
+|   |   |   |   daysInterval <= 227.609283
+|   |   |   |   |   mentionTags <= 0.137698
+|   |   |   |   |   |   percentageCapsLock <= 20.701949: n (15.0/1.0)
+|   |   |   |   |   |   percentageCapsLock > 20.701949
+|   |   |   |   |   |   |   percentageTitleWordsInComment <= 7.895609: n (70.0/30.0)
+|   |   |   |   |   |   |   percentageTitleWordsInComment > 7.895609: y (4.0)
+|   |   |   |   |   mentionTags > 0.137698
+|   |   |   |   |   |   mentionTags <= 1: n (24.0)
+|   |   |   |   |   |   mentionTags > 1: y (5.0)
+|   |   |   |   daysInterval > 227.609283
+|   |   |   |   |   daysInterval <= 331.987579: y (45.0/3.0)
+|   |   |   |   |   daysInterval > 331.987579: n (12.0/2.0)
+|   |   |   percentageTitleWordsInComment > 10: n (20.0)
+|   |   blackWords > 0
+|   |   |   mentionTags <= 0.918923: y (142.0/17.0)
+|   |   |   mentionTags > 0.918923
+|   |   |   |   percentageTitleWordsInComment <= 3.534034: n (6.0)
+|   |   |   |   percentageTitleWordsInComment > 3.534034: y (3.0/1.0)
+blackWords > 1
+|   mentionTags <= 0.984939
+|   |   percentageCapsLock <= 5.926925
+|   |   |   mentionTags <= 0.034613
+|   |   |   |   percentageTitleWordsInComment <= 0.029949
+|   |   |   |   |   daysInterval <= 797.021035: y (84.0/8.0)
+|   |   |   |   |   daysInterval > 797.021035
+|   |   |   |   |   |   daysInterval <= 1326.441577: n (7.0)
+|   |   |   |   |   |   daysInterval > 1326.441577: y (9.0)
+|   |   |   |   percentageTitleWordsInComment > 0.029949
+|   |   |   |   |   blackWords <= 2.458107
+|   |   |   |   |   |   percentageCapsLock <= 1.639109: n (5.0)
+|   |   |   |   |   |   percentageCapsLock > 1.639109
+|   |   |   |   |   |   |   daysInterval <= 8.639791
+|   |   |   |   |   |   |   |   percentageCapsLock <= 3.243189: n (4.0)
+|   |   |   |   |   |   |   |   percentageCapsLock > 3.243189
+|   |   |   |   |   |   |   |   |   daysInterval <= 1.230807: n (2.0)
+|   |   |   |   |   |   |   |   |   daysInterval > 1.230807: y (13.0/2.0)
+|   |   |   |   |   |   |   daysInterval > 8.639791: y (10.0)
+|   |   |   |   |   blackWords > 2.458107: n (6.0)
+|   |   |   mentionTags > 0.034613: n (13.0)
+|   |   percentageCapsLock > 5.926925
+|   |   |   daysInterval <= 1.184423
+|   |   |   |   percentageTitleWordsInComment <= 2.539386
+|   |   |   |   |   percentageCapsLock <= 12.070685: n (4.0)
+|   |   |   |   |   percentageCapsLock > 12.070685: y (10.0/2.0)
+|   |   |   |   percentageTitleWordsInComment > 2.539386: y (8.0)
+|   |   |   daysInterval > 1.184423
+|   |   |   |   mentionTags <= 0.449544: y (368.0/8.0)
+|   |   |   |   mentionTags > 0.449544
+|   |   |   |   |   percentageTitleWordsInComment <= 5.148893
+|   |   |   |   |   |   percentageCapsLock <= 12.37887
+|   |   |   |   |   |   |   blackWords <= 3.505418: n (5.0)
+|   |   |   |   |   |   |   blackWords > 3.505418: y (4.0)
+|   |   |   |   |   |   percentageCapsLock > 12.37887: y (5.0)
+|   |   |   |   |   percentageTitleWordsInComment > 5.148893: y (17.0)
+|   mentionTags > 0.984939
+|   |   percentageTitleWordsInComment <= 8.830387
+|   |   |   blackWords <= 2.513942: n (23.0)
+|   |   |   blackWords > 2.513942
+|   |   |   |   daysInterval <= 2.234419: y (2.0)
+|   |   |   |   daysInterval > 2.234419: n (8.0/1.0)
+|   |   percentageTitleWordsInComment > 8.830387: y (2.0)
+
+Number of Leaves  : 	46
+
+Size of the tree : 	91
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        1302               85.7708 %
+Incorrectly Classified Instances       216               14.2292 %
+Kappa statistic                          0.7131
+Mean absolute error                      0.1848
+Root mean squared error                  0.34  
+Relative absolute error                 37.2268 %
+Root relative squared error             68.2571 %
+Coverage of cases (0.95 level)          96.1792 %
+Mean rel. region size (0.95 level)      76.5152 %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,874    0,161    0,865      0,874    0,870      0,713    0,896     0,864     y
+                 0,839    0,126    0,848      0,839    0,843      0,713    0,896     0,870     n
+Weighted Avg.    0,858    0,145    0,858      0,858    0,858      0,713    0,896     0,867     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 720 104 |   a = y
+ 112 582 |   b = n
+

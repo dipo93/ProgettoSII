@@ -1,0 +1,49 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.lazy.IBk -K 3 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.unsupervised.attribute.Remove-R1-7,9,11-16,18,20
+Instances:    1518
+Attributes:   6
+              daysInterval
+              mentionTags
+              percentageTitleWordsInComment
+              percentageCapsLock
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 3 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        1300               85.639  %
+Incorrectly Classified Instances       218               14.361  %
+Kappa statistic                          0.7095
+Mean absolute error                      0.1647
+Root mean squared error                  0.3288
+Relative absolute error                 33.1782 %
+Root relative squared error             66.005  %
+Coverage of cases (0.95 level)          95.2569 %
+Mean rel. region size (0.95 level)      62.7141 %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,888    0,182    0,853      0,888    0,870      0,710    0,914     0,900     y
+                 0,818    0,112    0,861      0,818    0,839      0,710    0,914     0,881     n
+Weighted Avg.    0,856    0,150    0,857      0,856    0,856      0,710    0,914     0,892     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 732  92 |   a = y
+ 126 568 |   b = n
+

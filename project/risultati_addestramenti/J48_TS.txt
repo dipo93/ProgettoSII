@@ -1,0 +1,113 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     commentsCSVdefinitivo
+Instances:    450
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    evaluate on training data
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+redirectingLink = false
+|   blackWords <= 1
+|   |   percentageCapsLock <= 33
+|   |   |   commenterSubscribers <= 243: n (286.0/19.0)
+|   |   |   commenterSubscribers > 243
+|   |   |   |   blackWords <= 0: n (19.0/4.0)
+|   |   |   |   blackWords > 0
+|   |   |   |   |   likes <= 0: n (3.0/1.0)
+|   |   |   |   |   likes > 0: y (4.0)
+|   |   percentageCapsLock > 33
+|   |   |   hashtags <= 0
+|   |   |   |   percentageTitleWordsInComment <= 10
+|   |   |   |   |   percentageTitleWordsInComment <= 3.448276
+|   |   |   |   |   |   isReply = false
+|   |   |   |   |   |   |   percentageCapsLock <= 51: n (9.0/1.0)
+|   |   |   |   |   |   |   percentageCapsLock > 51: y (13.0/5.0)
+|   |   |   |   |   |   isReply = true
+|   |   |   |   |   |   |   percentageCapsLock <= 42: y (2.0)
+|   |   |   |   |   |   |   percentageCapsLock > 42: n (4.0)
+|   |   |   |   |   percentageTitleWordsInComment > 3.448276: y (6.0)
+|   |   |   |   percentageTitleWordsInComment > 10: n (5.0)
+|   |   |   hashtags > 0: n (4.0)
+|   blackWords > 1
+|   |   mentionTags <= 0
+|   |   |   percentageCapsLock <= 4
+|   |   |   |   percentageTitleWordsInComment <= 0
+|   |   |   |   |   percentageSpellingErrors <= 9.52381
+|   |   |   |   |   |   daysInterval <= 703.015546
+|   |   |   |   |   |   |   percentageTagsInComment <= 1.282051: y (3.0)
+|   |   |   |   |   |   |   percentageTagsInComment > 1.282051: n (3.0/1.0)
+|   |   |   |   |   |   daysInterval > 703.015546: n (3.0)
+|   |   |   |   |   percentageSpellingErrors > 9.52381: y (4.0)
+|   |   |   |   percentageTitleWordsInComment > 0: n (7.0)
+|   |   |   percentageCapsLock > 4
+|   |   |   |   replies <= 1: y (32.0/2.0)
+|   |   |   |   replies > 1: n (7.0/1.0)
+|   |   mentionTags > 0: n (16.0/1.0)
+redirectingLink = true
+|   commenterNameInComment = false: y (18.0)
+|   commenterNameInComment = true: n (2.0)
+
+Number of Leaves  : 	21
+
+Size of the tree : 	41
+
+
+Time taken to build model: 0.01 seconds
+
+=== Evaluation on training set ===
+
+Time taken to test model on training data: 0 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         415               92.2222 %
+Incorrectly Classified Instances        35                7.7778 %
+Kappa statistic                          0.7627
+Mean absolute error                      0.1327
+Root mean squared error                  0.2576
+Relative absolute error                 37.5319 %
+Root relative squared error             61.3195 %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)      93.1111 %
+Total Number of Instances              450     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,728    0,020    0,915      0,728    0,811      0,771    0,893     0,821     y
+                 0,980    0,272    0,924      0,980    0,951      0,771    0,893     0,943     n
+Weighted Avg.    0,922    0,214    0,922      0,922    0,919      0,771    0,893     0,915     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  75  28 |   a = y
+   7 340 |   b = n
+

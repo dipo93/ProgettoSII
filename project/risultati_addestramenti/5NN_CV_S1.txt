@@ -1,0 +1,65 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.lazy.IBk -K 5 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    553
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 5 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         460               83.1826 %
+Incorrectly Classified Instances        93               16.8174 %
+Kappa statistic                          0.6341
+Mean absolute error                      0.2258
+Root mean squared error                  0.3684
+Relative absolute error                 48.2933 %
+Root relative squared error             76.2039 %
+Coverage of cases (0.95 level)          96.0217 %
+Mean rel. region size (0.95 level)      73.7794 %
+Total Number of Instances              553     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,733    0,110    0,799      0,733    0,765      0,636    0,874     0,795     y
+                 0,890    0,267    0,849      0,890    0,869      0,636    0,874     0,894     n
+Weighted Avg.    0,832    0,208    0,830      0,832    0,830      0,636    0,874     0,857     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 151  55 |   a = y
+  38 309 |   b = n
+

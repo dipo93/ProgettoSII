@@ -1,0 +1,138 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    553
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+homePageLink = false
+|   blackWords <= 1
+|   |   redirectingLink = false
+|   |   |   percentageCapsLock <= 23
+|   |   |   |   commenterSubscribers <= 137
+|   |   |   |   |   blackWords <= 0.133566: n (184.0/8.0)
+|   |   |   |   |   blackWords > 0.133566
+|   |   |   |   |   |   blackWords <= 0.871794: y (6.0)
+|   |   |   |   |   |   blackWords > 0.871794
+|   |   |   |   |   |   |   likes <= 2
+|   |   |   |   |   |   |   |   replies <= 0.491836: n (60.0/8.0)
+|   |   |   |   |   |   |   |   replies > 0.491836
+|   |   |   |   |   |   |   |   |   daysInterval <= 2.904307: n (3.0)
+|   |   |   |   |   |   |   |   |   daysInterval > 2.904307: y (4.0)
+|   |   |   |   |   |   |   likes > 2: n (14.0)
+|   |   |   |   commenterSubscribers > 137
+|   |   |   |   |   blackWords <= 0.133566
+|   |   |   |   |   |   mentionTags <= 1
+|   |   |   |   |   |   |   percentageSpellingErrors <= 8
+|   |   |   |   |   |   |   |   percentageSpellingErrors <= 1.347354: n (10.0/1.0)
+|   |   |   |   |   |   |   |   percentageSpellingErrors > 1.347354: y (4.0)
+|   |   |   |   |   |   |   percentageSpellingErrors > 8: n (7.0)
+|   |   |   |   |   |   mentionTags > 1: y (2.0)
+|   |   |   |   |   blackWords > 0.133566: y (10.0/2.0)
+|   |   |   percentageCapsLock > 23
+|   |   |   |   blackWords <= 0
+|   |   |   |   |   isReply = false
+|   |   |   |   |   |   percentageCapsLock <= 51.886113: n (19.0/1.0)
+|   |   |   |   |   |   percentageCapsLock > 51.886113
+|   |   |   |   |   |   |   likes <= 2: n (12.0/3.0)
+|   |   |   |   |   |   |   likes > 2: y (9.0/2.0)
+|   |   |   |   |   isReply = true
+|   |   |   |   |   |   mentionTags <= 0.469735
+|   |   |   |   |   |   |   percentageSpellingErrors <= 7.35343
+|   |   |   |   |   |   |   |   daysInterval <= 10.335542: n (2.0)
+|   |   |   |   |   |   |   |   daysInterval > 10.335542: y (3.0/1.0)
+|   |   |   |   |   |   |   percentageSpellingErrors > 7.35343: y (4.0)
+|   |   |   |   |   |   mentionTags > 0.469735: n (11.0/1.0)
+|   |   |   |   blackWords > 0
+|   |   |   |   |   percentageTagsInComment <= 2.354487
+|   |   |   |   |   |   mentionTags <= 0.918923: y (19.0/1.0)
+|   |   |   |   |   |   mentionTags > 0.918923: n (3.0/1.0)
+|   |   |   |   |   percentageTagsInComment > 2.354487: n (2.0)
+|   |   redirectingLink = true: y (8.0)
+|   blackWords > 1
+|   |   videoMomentReference = false
+|   |   |   mentionTags <= 0.918923
+|   |   |   |   commenterNameInComment = false
+|   |   |   |   |   percentageCapsLock <= 5
+|   |   |   |   |   |   percentageTagsInComment <= 3.333333
+|   |   |   |   |   |   |   percentageTitleWordsInComment <= 2.258213: y (29.0/6.0)
+|   |   |   |   |   |   |   percentageTitleWordsInComment > 2.258213
+|   |   |   |   |   |   |   |   replies <= 0.491836: n (4.0)
+|   |   |   |   |   |   |   |   replies > 0.491836: y (3.0/1.0)
+|   |   |   |   |   |   percentageTagsInComment > 3.333333: n (2.0)
+|   |   |   |   |   percentageCapsLock > 5
+|   |   |   |   |   |   replies <= 2: y (75.0/1.0)
+|   |   |   |   |   |   replies > 2
+|   |   |   |   |   |   |   commenterSubscribers <= 199: n (2.0)
+|   |   |   |   |   |   |   commenterSubscribers > 199: y (2.0)
+|   |   |   |   commenterNameInComment = true: n (2.0)
+|   |   |   mentionTags > 0.918923
+|   |   |   |   percentageTitleWordsInComment <= 4.788497: n (13.0)
+|   |   |   |   percentageTitleWordsInComment > 4.788497
+|   |   |   |   |   daysInterval <= 327.555016: y (2.0)
+|   |   |   |   |   daysInterval > 327.555016: n (2.0)
+|   |   videoMomentReference = true: n (4.0)
+homePageLink = true: y (17.0)
+
+Number of Leaves  : 	35
+
+Size of the tree : 	69
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         462               83.5443 %
+Incorrectly Classified Instances        91               16.4557 %
+Kappa statistic                          0.6448
+Mean absolute error                      0.2002
+Root mean squared error                  0.3803
+Relative absolute error                 42.8075 %
+Root relative squared error             78.6626 %
+Coverage of cases (0.95 level)          92.4051 %
+Mean rel. region size (0.95 level)      73.4177 %
+Total Number of Instances              553     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,757    0,118    0,792      0,757    0,774      0,645    0,841     0,751     y
+                 0,882    0,243    0,860      0,882    0,871      0,645    0,841     0,847     n
+Weighted Avg.    0,835    0,196    0,834      0,835    0,835      0,645    0,841     0,811     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 156  50 |   a = y
+  41 306 |   b = n
+

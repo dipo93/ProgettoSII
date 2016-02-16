@@ -1,0 +1,110 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     commentsCSVdefinitivo
+Instances:    450
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+redirectingLink = false
+|   blackWords <= 1
+|   |   percentageCapsLock <= 33
+|   |   |   commenterSubscribers <= 243: n (286.0/19.0)
+|   |   |   commenterSubscribers > 243
+|   |   |   |   blackWords <= 0: n (19.0/4.0)
+|   |   |   |   blackWords > 0
+|   |   |   |   |   likes <= 0: n (3.0/1.0)
+|   |   |   |   |   likes > 0: y (4.0)
+|   |   percentageCapsLock > 33
+|   |   |   hashtags <= 0
+|   |   |   |   percentageTitleWordsInComment <= 10
+|   |   |   |   |   percentageTitleWordsInComment <= 3.448276
+|   |   |   |   |   |   isReply = false
+|   |   |   |   |   |   |   percentageCapsLock <= 51: n (9.0/1.0)
+|   |   |   |   |   |   |   percentageCapsLock > 51: y (13.0/5.0)
+|   |   |   |   |   |   isReply = true
+|   |   |   |   |   |   |   percentageCapsLock <= 42: y (2.0)
+|   |   |   |   |   |   |   percentageCapsLock > 42: n (4.0)
+|   |   |   |   |   percentageTitleWordsInComment > 3.448276: y (6.0)
+|   |   |   |   percentageTitleWordsInComment > 10: n (5.0)
+|   |   |   hashtags > 0: n (4.0)
+|   blackWords > 1
+|   |   mentionTags <= 0
+|   |   |   percentageCapsLock <= 4
+|   |   |   |   percentageTitleWordsInComment <= 0
+|   |   |   |   |   percentageSpellingErrors <= 9.52381
+|   |   |   |   |   |   daysInterval <= 703.015546
+|   |   |   |   |   |   |   percentageTagsInComment <= 1.282051: y (3.0)
+|   |   |   |   |   |   |   percentageTagsInComment > 1.282051: n (3.0/1.0)
+|   |   |   |   |   |   daysInterval > 703.015546: n (3.0)
+|   |   |   |   |   percentageSpellingErrors > 9.52381: y (4.0)
+|   |   |   |   percentageTitleWordsInComment > 0: n (7.0)
+|   |   |   percentageCapsLock > 4
+|   |   |   |   replies <= 1: y (32.0/2.0)
+|   |   |   |   replies > 1: n (7.0/1.0)
+|   |   mentionTags > 0: n (16.0/1.0)
+redirectingLink = true
+|   commenterNameInComment = false: y (18.0)
+|   commenterNameInComment = true: n (2.0)
+
+Number of Leaves  : 	21
+
+Size of the tree : 	41
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         375               83.3333 %
+Incorrectly Classified Instances        75               16.6667 %
+Kappa statistic                          0.4838
+Mean absolute error                      0.2187
+Root mean squared error                  0.3955
+Relative absolute error                 61.8207 %
+Root relative squared error             94.1228 %
+Coverage of cases (0.95 level)          91.7778 %
+Mean rel. region size (0.95 level)      88      %
+Total Number of Instances              450     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,515    0,072    0,679      0,515    0,586      0,491    0,678     0,490     y
+                 0,928    0,485    0,866      0,928    0,896      0,491    0,678     0,813     n
+Weighted Avg.    0,833    0,391    0,823      0,833    0,825      0,491    0,678     0,739     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  53  50 |   a = y
+  25 322 |   b = n
+

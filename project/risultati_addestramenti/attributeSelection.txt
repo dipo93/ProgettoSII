@@ -1,0 +1,66 @@
+=== Run information ===
+
+Evaluator:    weka.attributeSelection.InfoGainAttributeEval 
+Search:       weka.attributeSelection.Ranker -T -1.7976931348623157E308 -N -1
+Relation:     commentsCSVdefinitivo
+Instances:    450
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Evaluation mode:    evaluate on all training data
+
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+
+Attribute Evaluator (supervised, Class (nominal): 22 isSpam):
+	Information Gain Ranking Filter
+
+Ranked attributes:
+ 0.086958   21 blackWords
+ 0.069851   15 redirectingLink
+ 0.046576   19 percentageCapsLock
+ 0.043554   14 homePageLink
+ 0.029071   10 mentionTags
+ 0.028775   13 videoMomentReference
+ 0.023679   17 percentageTitleWordsInComment
+ 0.005561    1 isReply
+ 0.001671    4 commenterNameInComment
+ 0.001122    3 isCommentFromAuthor
+ 0.000198    2 authorNameInComment
+ 0          16 IP
+ 0           6 likes
+ 0           5 numbersInCommenterName
+ 0           7 replies
+ 0          12 commenterSubscribers
+ 0           8 daysInterval
+ 0          20 percentageSpellingErrors
+ 0          18 percentageTagsInComment
+ 0           9 repeatedWords
+ 0          11 hashtags
+
+Selected attributes: 21,15,19,14,10,13,17,1,4,3,2,16,6,5,7,12,8,20,18,9,11 : 21
+

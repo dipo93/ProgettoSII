@@ -1,0 +1,83 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.bayes.NaiveBayes 
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.unsupervised.attribute.Remove-R1-7,9,11-16,18,20
+Instances:    1518
+Attributes:   6
+              daysInterval
+              mentionTags
+              percentageTitleWordsInComment
+              percentageCapsLock
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Naive Bayes Classifier
+
+                                   Class
+Attribute                              y        n
+                                  (0.54)   (0.46)
+==================================================
+daysInterval
+  mean                           186.5951  190.123
+  std. dev.                      391.2706 479.4574
+  weight sum                          824      694
+  precision                        1.5328   1.5328
+
+mentionTags
+  mean                             0.1157   0.2923
+  std. dev.                          0.43   0.4293
+  weight sum                          824      694
+  precision                         0.027    0.027
+
+percentageTitleWordsInComment
+  mean                             1.4082   3.3167
+  std. dev.                        2.2847  10.5884
+  weight sum                          824      694
+  precision                        0.1984   0.1984
+
+percentageCapsLock
+  mean                            20.7399  12.6095
+  std. dev.                       18.8426  17.5586
+  weight sum                          824      694
+  precision                        0.0967   0.0967
+
+blackWords
+  mean                             1.7219   0.5097
+  std. dev.                        1.3605   0.8423
+  weight sum                          824      694
+  precision                          0.01     0.01
+
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         988               65.0856 %
+Incorrectly Classified Instances       530               34.9144 %
+Kappa statistic                          0.2634
+Mean absolute error                      0.352 
+Root mean squared error                  0.4642
+Relative absolute error                 70.9239 %
+Root relative squared error             93.1765 %
+Coverage of cases (0.95 level)          97.1014 %
+Mean rel. region size (0.95 level)      86.2978 %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,919    0,667    0,620      0,919    0,741      0,315    0,805     0,817     y
+                 0,333    0,081    0,775      0,333    0,466      0,315    0,805     0,759     n
+Weighted Avg.    0,651    0,399    0,691      0,651    0,615      0,315    0,805     0,790     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 757  67 |   a = y
+ 463 231 |   b = n
+

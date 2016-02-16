@@ -1,0 +1,94 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.bayes.BayesNet -D -Q weka.classifiers.bayes.net.search.local.K2 -- -P 1 -S BAYES -E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A 0.5
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    553
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Bayes Network Classifier
+not using ADTree
+#attributes=22 #classindex=21
+Network structure (nodes followed by parents)
+isReply(2): isSpam 
+authorNameInComment(2): isSpam 
+isCommentFromAuthor(2): isSpam 
+commenterNameInComment(2): isSpam 
+numbersInCommenterName(1): isSpam 
+likes(1): isSpam 
+replies(1): isSpam 
+daysInterval(1): isSpam 
+repeatedWords(1): isSpam 
+mentionTags(3): isSpam 
+hashtags(1): isSpam 
+commenterSubscribers(1): isSpam 
+videoMomentReference(2): isSpam 
+homePageLink(2): isSpam 
+redirectingLink(2): isSpam 
+IP(1): isSpam 
+percentageTitleWordsInComment(2): isSpam 
+percentageTagsInComment(1): isSpam 
+percentageCapsLock(2): isSpam 
+percentageSpellingErrors(1): isSpam 
+blackWords(5): isSpam 
+isSpam(2): 
+LogScore Bayes: -2501.875881741187
+LogScore BDeu: -2539.0450152473773
+LogScore MDL: -2565.687831253723
+LogScore ENTROPY: -2467.7997822301268
+LogScore AIC: -2498.7997822301268
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         467               84.4485 %
+Incorrectly Classified Instances        86               15.5515 %
+Kappa statistic                          0.6586
+Mean absolute error                      0.2335
+Root mean squared error                  0.3428
+Relative absolute error                 49.9255 %
+Root relative squared error             70.9031 %
+Coverage of cases (0.95 level)          98.915  %
+Mean rel. region size (0.95 level)      82.9114 %
+Total Number of Instances              553     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,728    0,086    0,833      0,728    0,777      0,662    0,898     0,866     y
+                 0,914    0,272    0,850      0,914    0,881      0,662    0,898     0,928     n
+Weighted Avg.    0,844    0,203    0,844      0,844    0,842      0,662    0,898     0,905     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 150  56 |   a = y
+  30 317 |   b = n
+

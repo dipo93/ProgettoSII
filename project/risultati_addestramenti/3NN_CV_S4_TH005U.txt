@@ -1,0 +1,51 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.lazy.IBk -K 1 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.unsupervised.attribute.Remove-R1-7,9,11,13-16,18
+Instances:    1518
+Attributes:   8
+              daysInterval
+              mentionTags
+              commenterSubscribers
+              percentageTitleWordsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 1 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        1317               86.7589 %
+Incorrectly Classified Instances       201               13.2411 %
+Kappa statistic                          0.7325
+Mean absolute error                      0.1329
+Root mean squared error                  0.3636
+Relative absolute error                 26.7819 %
+Root relative squared error             72.992  %
+Coverage of cases (0.95 level)          86.7589 %
+Mean rel. region size (0.95 level)      50      %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,892    0,161    0,868      0,892    0,880      0,733    0,868     0,843     y
+                 0,839    0,108    0,867      0,839    0,853      0,733    0,868     0,812     n
+Weighted Avg.    0,868    0,137    0,868      0,868    0,867      0,733    0,868     0,829     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 735  89 |   a = y
+ 112 582 |   b = n
+

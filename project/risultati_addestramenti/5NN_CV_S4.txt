@@ -1,0 +1,65 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.lazy.IBk -K 5 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    1518
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 5 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        1347               88.7352 %
+Incorrectly Classified Instances       171               11.2648 %
+Kappa statistic                          0.7721
+Mean absolute error                      0.1384
+Root mean squared error                  0.2828
+Relative absolute error                 27.8811 %
+Root relative squared error             56.769  %
+Coverage of cases (0.95 level)          97.9578 %
+Mean rel. region size (0.95 level)      65.1845 %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,919    0,150    0,879      0,919    0,899      0,773    0,953     0,947     y
+                 0,850    0,081    0,898      0,850    0,873      0,773    0,953     0,935     n
+Weighted Avg.    0,887    0,119    0,888      0,887    0,887      0,773    0,953     0,942     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 757  67 |   a = y
+ 104 590 |   b = n
+

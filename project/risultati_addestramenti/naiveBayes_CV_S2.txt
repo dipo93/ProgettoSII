@@ -1,0 +1,186 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.bayes.NaiveBayes 
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    759
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Naive Bayes Classifier
+
+                                    Class
+Attribute                               y         n
+                                   (0.54)    (0.46)
+====================================================
+isReply
+  false                              290.0     216.0
+  true                               124.0     133.0
+  [total]                            414.0     349.0
+
+authorNameInComment
+  false                              411.0     343.0
+  true                                 3.0       6.0
+  [total]                            414.0     349.0
+
+isCommentFromAuthor
+  false                              412.0     347.0
+  true                                 2.0       2.0
+  [total]                            414.0     349.0
+
+commenterNameInComment
+  false                              413.0     346.0
+  true                                 1.0       3.0
+  [total]                            414.0     349.0
+
+numbersInCommenterName
+  mean                              0.1655    0.2579
+  std. dev.                          0.487    0.7821
+  weight sum                           412       347
+  precision                          0.082     0.082
+
+likes
+  mean                             11.1279   30.7456
+  std. dev.                        50.6406  109.0592
+  weight sum                           412       347
+  precision                         3.9353    3.9353
+
+replies
+  mean                              2.0615    3.5854
+  std. dev.                         8.7837   13.7941
+  weight sum                           412       347
+  precision                         0.7113    0.7113
+
+daysInterval
+  mean                            187.8694  190.0451
+  std. dev.                       395.2508  478.7137
+  weight sum                           412       347
+  precision                         3.0698    3.0698
+
+repeatedWords
+  mean                              1.0975    1.0346
+  std. dev.                         0.3555    0.2376
+  weight sum                           412       347
+  precision                         0.0769    0.0769
+
+mentionTags
+  mean                              0.1219    0.2911
+  std. dev.                         0.4894    0.4606
+  weight sum                           412       347
+  precision                         0.1111    0.1111
+
+hashtags
+  mean                              0.1267    0.0335
+  std. dev.                          0.621    0.2217
+  weight sum                           412       347
+  precision                         0.1905    0.1905
+
+commenterSubscribers
+  mean                            361.0655  2708.203
+  std. dev.                      2243.3459 26736.493
+  weight sum                           412       347
+  precision                      1025.9241 1025.9241
+
+videoMomentReference
+  false                              412.0     303.0
+  true                                 2.0      46.0
+  [total]                            414.0     349.0
+
+homePageLink
+  false                              381.0     348.0
+  true                                33.0       1.0
+  [total]                            414.0     349.0
+
+redirectingLink
+  false                              373.0     346.0
+  true                                41.0       3.0
+  [total]                            414.0     349.0
+
+IP
+  false                              413.0     348.0
+  [total]                            413.0     348.0
+
+percentageTitleWordsInComment
+  mean                              1.3818    3.5024
+  std. dev.                         2.3393   11.0407
+  weight sum                           412       347
+  precision                         0.5291    0.5291
+
+percentageTagsInComment
+  mean                              0.1785    9.2177
+  std. dev.                         6.1275  167.5286
+  weight sum                           412       347
+  precision                        36.7647   36.7647
+
+percentageCapsLock
+  mean                             20.6618   13.1575
+  std. dev.                        19.0813   18.9035
+  weight sum                           412       347
+  precision                         0.3012    0.3012
+
+percentageSpellingErrors
+  mean                             14.0035    9.6222
+  std. dev.                          66.77   18.1425
+  weight sum                           412       347
+  precision                         2.7778    2.7778
+
+blackWords
+  mean                              1.6823    0.5005
+  std. dev.                         1.3957    0.9162
+  weight sum                           412       347
+  precision                          0.031     0.031
+
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         474               62.4506 %
+Incorrectly Classified Instances       285               37.5494 %
+Kappa statistic                          0.2004
+Mean absolute error                      0.3715
+Root mean squared error                  0.5826
+Relative absolute error                 74.8366 %
+Root relative squared error            116.9526 %
+Coverage of cases (0.95 level)          72.859  %
+Mean rel. region size (0.95 level)      58.8933 %
+Total Number of Instances              759     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,942    0,752    0,598      0,942    0,731      0,268    0,753     0,768     y
+                 0,248    0,058    0,782      0,248    0,376      0,268    0,753     0,701     n
+Weighted Avg.    0,625    0,435    0,682      0,625    0,569      0,268    0,753     0,737     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 388  24 |   a = y
+ 261  86 |   b = n
+

@@ -1,0 +1,66 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.rules.ZeroR 
+Relation:     commentsCSVdefinitivo
+Instances:    450
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    evaluate on training data
+
+=== Classifier model (full training set) ===
+
+ZeroR predicts class value: n
+
+Time taken to build model: 0 seconds
+
+=== Evaluation on training set ===
+
+Time taken to test model on training data: 0 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         347               77.1111 %
+Incorrectly Classified Instances       103               22.8889 %
+Kappa statistic                          0     
+Mean absolute error                      0.3536
+Root mean squared error                  0.4201
+Relative absolute error                100      %
+Root relative squared error            100      %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)     100      %
+Total Number of Instances              450     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,000    0,000    0,000      0,000    0,000      0,000    0,500     0,229     y
+                 1,000    1,000    0,771      1,000    0,871      0,000    0,500     0,771     n
+Weighted Avg.    0,771    0,771    0,595      0,771    0,671      0,000    0,500     0,647     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+   0 103 |   a = y
+   0 347 |   b = n
+

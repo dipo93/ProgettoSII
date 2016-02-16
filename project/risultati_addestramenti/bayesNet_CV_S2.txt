@@ -1,0 +1,94 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.bayes.BayesNet -D -Q weka.classifiers.bayes.net.search.local.K2 -- -P 1 -S BAYES -E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A 0.5
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    759
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Bayes Network Classifier
+not using ADTree
+#attributes=22 #classindex=21
+Network structure (nodes followed by parents)
+isReply(2): isSpam 
+authorNameInComment(2): isSpam 
+isCommentFromAuthor(2): isSpam 
+commenterNameInComment(2): isSpam 
+numbersInCommenterName(1): isSpam 
+likes(1): isSpam 
+replies(3): isSpam 
+daysInterval(2): isSpam 
+repeatedWords(4): isSpam 
+mentionTags(4): isSpam 
+hashtags(1): isSpam 
+commenterSubscribers(1): isSpam 
+videoMomentReference(2): isSpam 
+homePageLink(2): isSpam 
+redirectingLink(2): isSpam 
+IP(1): isSpam 
+percentageTitleWordsInComment(4): isSpam 
+percentageTagsInComment(1): isSpam 
+percentageCapsLock(2): isSpam 
+percentageSpellingErrors(3): isSpam 
+blackWords(6): isSpam 
+isSpam(2): 
+LogScore Bayes: -6113.128419333587
+LogScore BDeu: -6193.525201676307
+LogScore MDL: -6230.463826236778
+LogScore ENTROPY: -6048.083777358399
+LogScore AIC: -6103.083777358399
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         659               86.8248 %
+Incorrectly Classified Instances       100               13.1752 %
+Kappa statistic                          0.7373
+Mean absolute error                      0.1669
+Root mean squared error                  0.315 
+Relative absolute error                 33.6263 %
+Root relative squared error             63.2255 %
+Coverage of cases (0.95 level)          97.6285 %
+Mean rel. region size (0.95 level)      71.1462 %
+Total Number of Instances              759     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,823    0,078    0,926      0,823    0,871      0,743    0,936     0,951     y
+                 0,922    0,177    0,814      0,922    0,865      0,743    0,936     0,912     n
+Weighted Avg.    0,868    0,123    0,875      0,868    0,868      0,743    0,936     0,933     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 339  73 |   a = y
+  27 320 |   b = n
+

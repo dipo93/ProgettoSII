@@ -1,0 +1,117 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.bayes.NaiveBayes 
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.unsupervised.attribute.Remove-R1-5,9,11,14-16,18
+Instances:    1518
+Attributes:   11
+              likes
+              replies
+              daysInterval
+              mentionTags
+              commenterSubscribers
+              videoMomentReference
+              percentageTitleWordsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Naive Bayes Classifier
+
+                                    Class
+Attribute                               y         n
+                                   (0.54)    (0.46)
+====================================================
+likes
+  mean                             10.1386   29.0741
+  std. dev.                          40.74  101.1943
+  weight sum                           824       694
+  precision                          1.475     1.475
+
+replies
+  mean                              2.0158     3.523
+  std. dev.                         8.5619   13.5593
+  weight sum                           824       694
+  precision                         0.2285    0.2285
+
+daysInterval
+  mean                            186.5951   190.123
+  std. dev.                       391.2706  479.4574
+  weight sum                           824       694
+  precision                         1.5328    1.5328
+
+mentionTags
+  mean                              0.1157    0.2923
+  std. dev.                           0.43    0.4293
+  weight sum                           824       694
+  precision                          0.027     0.027
+
+commenterSubscribers
+  mean                            330.2378 2284.9476
+  std. dev.                      1822.855623059.9646
+  weight sum                           824       694
+  precision                        366.733   366.733
+
+videoMomentReference
+  false                              824.0     638.0
+  true                                 2.0      58.0
+  [total]                            826.0     696.0
+
+percentageTitleWordsInComment
+  mean                              1.4082    3.3167
+  std. dev.                         2.2847   10.5884
+  weight sum                           824       694
+  precision                         0.1984    0.1984
+
+percentageCapsLock
+  mean                             20.7399   12.6095
+  std. dev.                        18.8426   17.5586
+  weight sum                           824       694
+  precision                         0.0967    0.0967
+
+percentageSpellingErrors
+  mean                              13.404     9.585
+  std. dev.                         62.465   17.3157
+  weight sum                           824       694
+  precision                         1.0278    1.0278
+
+blackWords
+  mean                              1.7219    0.5097
+  std. dev.                         1.3605    0.8423
+  weight sum                           824       694
+  precision                           0.01      0.01
+
+
+
+Time taken to build model: 0.03 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         953               62.78   %
+Incorrectly Classified Instances       565               37.22   %
+Kappa statistic                          0.2079
+Mean absolute error                      0.3745
+Root mean squared error                  0.5803
+Relative absolute error                 75.4429 %
+Root relative squared error            116.4965 %
+Coverage of cases (0.95 level)          73.386  %
+Mean rel. region size (0.95 level)      60.0132 %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,942    0,745    0,600      0,942    0,733      0,276    0,776     0,782     y
+                 0,255    0,058    0,787      0,255    0,385      0,276    0,776     0,713     n
+Weighted Avg.    0,628    0,431    0,685      0,628    0,574      0,276    0,776     0,751     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 776  48 |   a = y
+ 517 177 |   b = n
+

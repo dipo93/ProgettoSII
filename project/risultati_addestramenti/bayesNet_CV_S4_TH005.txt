@@ -1,0 +1,62 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.bayes.BayesNet -D -Q weka.classifiers.bayes.net.search.local.K2 -- -P 1 -S BAYES -E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A 0.5
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.unsupervised.attribute.Remove-R1-7,9,11-16,18,20
+Instances:    1518
+Attributes:   6
+              daysInterval
+              mentionTags
+              percentageTitleWordsInComment
+              percentageCapsLock
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Bayes Network Classifier
+not using ADTree
+#attributes=6 #classindex=5
+Network structure (nodes followed by parents)
+daysInterval(5): isSpam 
+mentionTags(3): isSpam 
+percentageTitleWordsInComment(4): isSpam 
+percentageCapsLock(3): isSpam 
+blackWords(6): isSpam 
+isSpam(2): 
+LogScore Bayes: -7450.96979295548
+LogScore BDeu: -7511.270189407827
+LogScore MDL: -7523.064481800577
+LogScore ENTROPY: -7402.199523994309
+LogScore AIC: -7435.199523994309
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        1232               81.1594 %
+Incorrectly Classified Instances       286               18.8406 %
+Kappa statistic                          0.6217
+Mean absolute error                      0.2499
+Root mean squared error                  0.361 
+Relative absolute error                 50.3527 %
+Root relative squared error             72.4621 %
+Coverage of cases (0.95 level)          98.7484 %
+Mean rel. region size (0.95 level)      83.7945 %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,808    0,184    0,839      0,808    0,823      0,622    0,893     0,898     y
+                 0,816    0,192    0,782      0,816    0,798      0,622    0,893     0,874     n
+Weighted Avg.    0,812    0,188    0,813      0,812    0,812      0,622    0,893     0,887     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 666 158 |   a = y
+ 128 566 |   b = n
+

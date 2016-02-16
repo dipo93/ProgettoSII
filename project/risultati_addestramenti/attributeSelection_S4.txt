@@ -1,0 +1,66 @@
+=== Run information ===
+
+Evaluator:    weka.attributeSelection.InfoGainAttributeEval 
+Search:       weka.attributeSelection.Ranker -T -1.7976931348623157E308 -N -1
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    1518
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Evaluation mode:    evaluate on all training data
+
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+
+Attribute Evaluator (supervised, Class (nominal): 22 isSpam):
+	Information Gain Ranking Filter
+
+Ranked attributes:
+ 0.26844476   21 blackWords
+ 0.09736283   19 percentageCapsLock
+ 0.09314471   17 percentageTitleWordsInComment
+ 0.08454776   10 mentionTags
+ 0.06428138    8 daysInterval
+ 0.05785189   20 percentageSpellingErrors
+ 0.05599018   12 commenterSubscribers
+ 0.05045001    7 replies
+ 0.04993354    6 likes
+ 0.03940098   13 videoMomentReference
+ 0.03799976   18 percentageTagsInComment
+ 0.03521256   14 homePageLink
+ 0.03294015   15 redirectingLink
+ 0.02118086    9 repeatedWords
+ 0.02018743   11 hashtags
+ 0.01611652    5 numbersInCommenterName
+ 0.00148919    4 commenterNameInComment
+ 0.00102611    1 isReply
+ 0.00090456    2 authorNameInComment
+ 0.00000701    3 isCommentFromAuthor
+ 0            16 IP
+
+Selected attributes: 21,19,17,10,8,20,12,7,6,13,18,14,15,9,11,5,4,1,2,3,16 : 21
+
