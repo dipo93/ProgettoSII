@@ -5,13 +5,19 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+//import java.math.BigInteger;
 import java.util.List;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 import main_package.Auth;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+//import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.YouTube;
+//import com.google.api.services.youtube.model.Channel;
+//import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.api.services.youtube.model.Comment;
 import com.google.api.services.youtube.model.CommentThread;
 import com.google.api.services.youtube.model.CommentThreadListResponse;
@@ -62,50 +68,48 @@ public class CommentHandling {
 
             // Call the YouTube Data API's commentThreads.list method to
             // retrieve video comment threads.
-            
             CommentThreadListResponse videoCommentsListResponseRelevance = youtube.commentThreads()
             		.list("snippet, replies").setVideoId(videoId).setTextFormat("plainText")
                     .setMaxResults(20L).setOrder("relevance").execute();
             
             CommentThreadListResponse videoCommentsListResponseTime = youtube.commentThreads()
             		.list("snippet, replies").setVideoId(videoId).setTextFormat("plainText")
-                    .setMaxResults(100L).setOrder("time").execute();
+                    .setMaxResults(30L).setOrder("time").execute();
             
-//            String nextpageRel = videoCommentsListResponseRelevance.getNextPageToken();
-//            String nextpageTime = videoCommentsListResponseTime.getNextPageToken();
+//            String nextPageRel = videoCommentsListResponseRelevance.getNextPageToken();
+//            String nextPageTime = videoCommentsListResponseTime.getNextPageToken();
             
             List<CommentThread> videoCommentsRel = videoCommentsListResponseRelevance.getItems();
             List<CommentThread> videoCommentsTime = videoCommentsListResponseTime.getItems();
             
-            //getting all the comments
-//            while(nextpageRel != null){
-//            	
+            //getting all the comments in relevance order
+//            while(nextPageRel != null){
 //            	videoCommentsListResponseRelevance = youtube.commentThreads().list("snippet, replies")
-//                        .setVideoId(videoId).setTextFormat("plainText").setMaxResults(100L).
-//                        setPageToken(nextpageRel).setOrder("relevance").execute();
+//                        .setVideoId(videoId).setTextFormat("plainText").setMaxResults(20L).
+//                        setPageToken(nextPageRel).setOrder("relevance").execute();
 //            	
 //            	videoCommentsRel.addAll(videoCommentsListResponseRelevance.getItems());
-//            	nextpageRel = videoCommentsListResponseRelevance.getNextPageToken();
+//                nextPageRel = videoCommentsListResponseRelevance.getNextPageToken();
 //            }
 //            
-//            
-//            while(nextpageTime != null){
-//
+//          //getting all the comments in time order
+//            while(nextPageTime != null){
 //            	videoCommentsListResponseTime = youtube.commentThreads().list("snippet, replies")
-//            			.setVideoId(videoId).setTextFormat("plainText").setMaxResults(100L).
-//            			setPageToken(nextpageTime).setOrder("time").execute();
-//
+//                        .setVideoId(videoId).setTextFormat("plainText").setMaxResults(20L).
+//                        setPageToken(nextPageTime).setOrder("time").execute();
+//            	
 //            	videoCommentsTime.addAll(videoCommentsListResponseTime.getItems());
-//            	nextpageTime = videoCommentsListResponseTime.getNextPageToken();
+//            	nextPageTime = videoCommentsListResponseTime.getNextPageToken();
 //            }
             
-
-        	//comments.txt is a file where we will store the comments in a JSON like format
+            
+        	//commentsTxt.txt is a file where we will store the comments in a JSON like format
         	FileWriter commentsTxt = new FileWriter("comments.txt", true);
         	//commentsCSV.csv is a file used for storing the features
         	FileWriter commentsCSV = new FileWriter("commentsCSV.csv", true);
         	BufferedWriter c = new BufferedWriter(commentsTxt);
         	BufferedWriter csv = new BufferedWriter(commentsCSV);
+            
             
             if (videoCommentsRel.isEmpty()) {
                 System.out.println("Can't get video comments.");
@@ -133,8 +137,6 @@ public class CommentHandling {
                     
                     FeatureProcessing.storeFeatures(videoComment.getSnippet().getTopLevelComment(), video, videoComment, csv, youtube);
                     
-
-                    
                     System.out.println("\n-------------------------------------------------------------\n");
                     i++;
                     
@@ -149,26 +151,21 @@ public class CommentHandling {
                     		
                     		storeVideoComment(videoReply, video, null, c);
                     		
-                    		
                     		FeatureProcessing.storeFeatures(videoReply, video, null, csv, youtube);
                             
                     		System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                             i++;
-                            
                     	}
-                    	
                     } // end if
-                    
                 } //end for
-                
                 System.out.println(i + " comments and replies in relevance retrieved");
-                
             } //end else
+            
+            
             
             if (videoCommentsTime.isEmpty()) {
                 System.out.println("Can't get video comments.");
             } else {
-            	
             	//comment retrieved counter
             	int i = 0;
             	
@@ -201,18 +198,15 @@ public class CommentHandling {
                             
                     		System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                             i++;
-                            
                     	}
-                    	
                     } // end if
-                    
                 } //end for
-                
                 System.out.println(i + " comments and replies in time retrieved");
                 c.close();
                 csv.close();
-                
             } //end else
+            
+            
             
         } catch (GoogleJsonResponseException e) {
             System.err.println("GoogleJsonResponseException code: " + e.getDetails().getCode()
@@ -245,7 +239,6 @@ public class CommentHandling {
      * Prints on the console all the informations about the comment
      * */
     private static void printVideoComment(Comment videoComment, Video video, CommentThread cThread) throws IOException {
-    	
     	System.out.println("Author Channel ID: "+videoComment.getSnippet().getAuthorChannelId().getValue());
     	System.out.println("Author Display Name: "+videoComment.getSnippet().getAuthorDisplayName());
     	System.out.println("Author Channel URL: "+videoComment.getSnippet().getAuthorChannelUrl());
@@ -265,7 +258,7 @@ public class CommentHandling {
         System.out.println("Video Description: " + video.getSnippet().getDescription());
         System.out.println("Video Published At: " + video.getSnippet().getPublishedAt());
         System.out.print("Video Tags: ");
-        if (video.getSnippet().getTags() == null)
+        if(video.getSnippet().getTags() == null)
         	System.out.println("");
         else for (String tag : video.getSnippet().getTags()) {
         	System.out.print(tag + " ");
@@ -303,12 +296,13 @@ public class CommentHandling {
     	b.write("\"videoDescription\" : \"" + video.getSnippet().getDescription()+"\",\n");
     	b.write("\"videoPublishedAt\" : \"" + video.getSnippet().getPublishedAt()+"\",\n");
     	b.write("\"videoTags\" : \"");
-    	if (video.getSnippet().getTags() == null)
+    	if(video.getSnippet().getTags() == null)
         	System.out.println("");
         else for (String tag : video.getSnippet().getTags()) {
         	b.write(tag + " ");
         }
         b.write("\",\n");
     	b.write("},\n\n");
-    }
+    }    
+
 }
