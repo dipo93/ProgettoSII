@@ -1,0 +1,226 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.meta.Vote -S 1 -B "weka.classifiers.bayes.NaiveBayes " -B "weka.classifiers.bayes.BayesNet -D -Q weka.classifiers.bayes.net.search.local.K2 -- -P 1 -S BAYES -E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A 0.5" -R AVG
+Relation:     commentsCSVdefinitivo
+Instances:    450
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Vote combines the probability distributions of these base learners:
+	weka.classifiers.bayes.NaiveBayes 
+	weka.classifiers.bayes.BayesNet -D -Q weka.classifiers.bayes.net.search.local.K2 -- -P 1 -S BAYES -E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A 0.5
+using the 'Average' combination rule 
+
+All the models:
+
+Naive Bayes Classifier
+
+                                    Class
+Attribute                               y         n
+                                   (0.23)    (0.77)
+====================================================
+isReply
+  false                               75.0     216.0
+  true                                30.0     133.0
+  [total]                            105.0     349.0
+
+authorNameInComment
+  false                              102.0     343.0
+  true                                 3.0       6.0
+  [total]                            105.0     349.0
+
+isCommentFromAuthor
+  false                              103.0     347.0
+  true                                 2.0       2.0
+  [total]                            105.0     349.0
+
+commenterNameInComment
+  false                              104.0     346.0
+  true                                 1.0       3.0
+  [total]                            105.0     349.0
+
+numbersInCommenterName
+  mean                              0.1165    0.2594
+  std. dev.                         0.4887    0.7828
+  weight sum                           103       347
+  precision                              1         1
+
+likes
+  mean                             20.0041   30.5424
+  std. dev.                        91.7356  109.1268
+  weight sum                           103       347
+  precision                        12.3378   12.3378
+
+replies
+  mean                              2.4328    3.8618
+  std. dev.                         9.4319   13.6837
+  weight sum                           103       347
+  precision                         3.6316    3.6316
+
+daysInterval
+  mean                            193.5828  189.6826
+  std. dev.                       415.5769  478.8054
+  weight sum                           103       347
+  precision                          5.135     5.135
+
+repeatedWords
+  mean                               1.068    1.0346
+  std. dev.                         0.3487    0.2376
+  weight sum                           103       347
+  precision                              1         1
+
+mentionTags
+  mean                              0.0906    0.0067
+  std. dev.                         0.7214    0.3889
+  weight sum                           103       347
+  precision                         2.3333    2.3333
+
+hashtags
+  mean                              0.1165    0.0423
+  std. dev.                         0.6192    0.2546
+  weight sum                           103       347
+  precision                         1.3333    1.3333
+
+commenterSubscribers
+  mean                            699.4434 2707.6555
+  std. dev.                      4081.335126725.9283
+  weight sum                           103       347
+  precision                      3001.7778 3001.7778
+
+videoMomentReference
+  false                              103.0     303.0
+  true                                 2.0      46.0
+  [total]                            105.0     349.0
+
+homePageLink
+  false                               95.0     348.0
+  true                                10.0       1.0
+  [total]                            105.0     349.0
+
+redirectingLink
+  false                               86.0     346.0
+  true                                19.0       3.0
+  [total]                            105.0     349.0
+
+IP
+  false                              104.0     348.0
+  [total]                            104.0     348.0
+
+percentageTitleWordsInComment
+  mean                              1.3372    3.5398
+  std. dev.                         2.8516   11.0936
+  weight sum                           103       347
+  precision                         1.8868    1.8868
+
+percentageTagsInComment
+  mean                                   0    9.0058
+  std. dev.                         14.881  167.5169
+  weight sum                           103       347
+  precision                        89.2857   89.2857
+
+percentageCapsLock
+  mean                             21.2205   13.1844
+  std. dev.                        21.5859   18.8982
+  weight sum                           103       347
+  precision                         1.7857    1.7857
+
+percentageSpellingErrors
+  mean                             15.7917     9.889
+  std. dev.                        83.2713   18.8263
+  weight sum                           103       347
+  precision                        10.4938   10.4938
+
+blackWords
+  mean                              1.5437    0.5014
+  std. dev.                          1.569    0.9154
+  weight sum                           103       347
+  precision                              1         1
+
+
+Bayes Network Classifier
+not using ADTree
+#attributes=22 #classindex=21
+Network structure (nodes followed by parents)
+isReply(2): isSpam 
+authorNameInComment(2): isSpam 
+isCommentFromAuthor(2): isSpam 
+commenterNameInComment(2): isSpam 
+numbersInCommenterName(1): isSpam 
+likes(1): isSpam 
+replies(1): isSpam 
+daysInterval(1): isSpam 
+repeatedWords(1): isSpam 
+mentionTags(2): isSpam 
+hashtags(1): isSpam 
+commenterSubscribers(1): isSpam 
+videoMomentReference(2): isSpam 
+homePageLink(2): isSpam 
+redirectingLink(2): isSpam 
+IP(1): isSpam 
+percentageTitleWordsInComment(1): isSpam 
+percentageTagsInComment(1): isSpam 
+percentageCapsLock(2): isSpam 
+percentageSpellingErrors(1): isSpam 
+blackWords(2): isSpam 
+isSpam(2): 
+LogScore Bayes: -1588.339585510782
+LogScore BDeu: -1605.5185899232233
+LogScore MDL: -1625.709702996422
+LogScore ENTROPY: -1561.5626033773963
+LogScore AIC: -1582.5626033773963
+
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         309               68.6667 %
+Incorrectly Classified Instances       141               31.3333 %
+Kappa statistic                          0.2695
+Mean absolute error                      0.3665
+Root mean squared error                  0.4312
+Relative absolute error                103.5935 %
+Root relative squared error            102.6223 %
+Coverage of cases (0.95 level)          98.8889 %
+Mean rel. region size (0.95 level)      94.7778 %
+Total Number of Instances              450     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,621    0,294    0,386      0,621    0,476      0,285    0,766     0,595     y
+                 0,706    0,379    0,863      0,706    0,777      0,285    0,766     0,895     n
+Weighted Avg.    0,687    0,359    0,753      0,687    0,708      0,285    0,766     0,826     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  64  39 |   a = y
+ 102 245 |   b = n
+

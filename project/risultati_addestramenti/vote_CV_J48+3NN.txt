@@ -1,0 +1,121 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.meta.Vote -S 1 -B "weka.classifiers.trees.J48 -C 0.25 -M 2" -B "weka.classifiers.lazy.IBk -K 3 -W 0 -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"" -R AVG
+Relation:     commentsCSVdefinitivo
+Instances:    450
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Vote combines the probability distributions of these base learners:
+	weka.classifiers.trees.J48 -C 0.25 -M 2
+	weka.classifiers.lazy.IBk -K 3 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+using the 'Average' combination rule 
+
+All the models:
+
+J48 pruned tree
+------------------
+
+redirectingLink = false
+|   blackWords <= 1
+|   |   percentageCapsLock <= 33
+|   |   |   commenterSubscribers <= 243: n (286.0/19.0)
+|   |   |   commenterSubscribers > 243
+|   |   |   |   blackWords <= 0: n (19.0/4.0)
+|   |   |   |   blackWords > 0
+|   |   |   |   |   likes <= 0: n (3.0/1.0)
+|   |   |   |   |   likes > 0: y (4.0)
+|   |   percentageCapsLock > 33
+|   |   |   hashtags <= 0
+|   |   |   |   percentageTitleWordsInComment <= 10
+|   |   |   |   |   percentageTitleWordsInComment <= 3.448276
+|   |   |   |   |   |   isReply = false
+|   |   |   |   |   |   |   percentageCapsLock <= 51: n (9.0/1.0)
+|   |   |   |   |   |   |   percentageCapsLock > 51: y (13.0/5.0)
+|   |   |   |   |   |   isReply = true
+|   |   |   |   |   |   |   percentageCapsLock <= 42: y (2.0)
+|   |   |   |   |   |   |   percentageCapsLock > 42: n (4.0)
+|   |   |   |   |   percentageTitleWordsInComment > 3.448276: y (6.0)
+|   |   |   |   percentageTitleWordsInComment > 10: n (5.0)
+|   |   |   hashtags > 0: n (4.0)
+|   blackWords > 1
+|   |   mentionTags <= 0
+|   |   |   percentageCapsLock <= 4
+|   |   |   |   percentageTitleWordsInComment <= 0
+|   |   |   |   |   percentageSpellingErrors <= 9.52381
+|   |   |   |   |   |   daysInterval <= 703.015546
+|   |   |   |   |   |   |   percentageTagsInComment <= 1.282051: y (3.0)
+|   |   |   |   |   |   |   percentageTagsInComment > 1.282051: n (3.0/1.0)
+|   |   |   |   |   |   daysInterval > 703.015546: n (3.0)
+|   |   |   |   |   percentageSpellingErrors > 9.52381: y (4.0)
+|   |   |   |   percentageTitleWordsInComment > 0: n (7.0)
+|   |   |   percentageCapsLock > 4
+|   |   |   |   replies <= 1: y (32.0/2.0)
+|   |   |   |   replies > 1: n (7.0/1.0)
+|   |   mentionTags > 0: n (16.0/1.0)
+redirectingLink = true
+|   commenterNameInComment = false: y (18.0)
+|   commenterNameInComment = true: n (2.0)
+
+Number of Leaves  : 	21
+
+Size of the tree : 	41
+
+IB1 instance-based classifier
+using 3 nearest neighbour(s) for classification
+
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         372               82.6667 %
+Incorrectly Classified Instances        78               17.3333 %
+Kappa statistic                          0.4691
+Mean absolute error                      0.2139
+Root mean squared error                  0.3611
+Relative absolute error                 60.4771 %
+Root relative squared error             85.9501 %
+Coverage of cases (0.95 level)          94      %
+Mean rel. region size (0.95 level)      68.2222 %
+Total Number of Instances              450     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,515    0,081    0,654      0,515    0,576      0,474    0,769     0,639     y
+                 0,919    0,485    0,864      0,919    0,891      0,474    0,769     0,870     n
+Weighted Avg.    0,827    0,393    0,816      0,827    0,819      0,474    0,769     0,817     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  53  50 |   a = y
+  28 319 |   b = n
+

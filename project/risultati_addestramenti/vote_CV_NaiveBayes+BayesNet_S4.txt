@@ -1,0 +1,226 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.meta.Vote -S 1 -B "weka.classifiers.bayes.BayesNet -D -Q weka.classifiers.bayes.net.search.local.K2 -- -P 1 -S BAYES -E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A 0.5" -B "weka.classifiers.bayes.NaiveBayes " -R AVG
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    1518
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+Vote combines the probability distributions of these base learners:
+	weka.classifiers.bayes.BayesNet -D -Q weka.classifiers.bayes.net.search.local.K2 -- -P 1 -S BAYES -E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A 0.5
+	weka.classifiers.bayes.NaiveBayes 
+using the 'Average' combination rule 
+
+All the models:
+
+Bayes Network Classifier
+not using ADTree
+#attributes=22 #classindex=21
+Network structure (nodes followed by parents)
+isReply(2): isSpam 
+authorNameInComment(2): isSpam 
+isCommentFromAuthor(2): isSpam 
+commenterNameInComment(2): isSpam 
+numbersInCommenterName(2): isSpam 
+likes(4): isSpam 
+replies(1): isSpam 
+daysInterval(5): isSpam 
+repeatedWords(2): isSpam 
+mentionTags(3): isSpam 
+hashtags(2): isSpam 
+commenterSubscribers(5): isSpam 
+videoMomentReference(2): isSpam 
+homePageLink(2): isSpam 
+redirectingLink(2): isSpam 
+IP(1): isSpam 
+percentageTitleWordsInComment(4): isSpam 
+percentageTagsInComment(4): isSpam 
+percentageCapsLock(3): isSpam 
+percentageSpellingErrors(3): isSpam 
+blackWords(6): isSpam 
+isSpam(2): 
+LogScore Bayes: -15446.504077211823
+LogScore BDeu: -15566.554902473968
+LogScore MDL: -15615.084544552828
+LogScore ENTROPY: -15333.06630967154
+LogScore AIC: -15410.06630967154
+
+Naive Bayes Classifier
+
+                                    Class
+Attribute                               y         n
+                                   (0.54)    (0.46)
+====================================================
+isReply
+  false                              582.0     466.0
+  true                               244.0     230.0
+  [total]                            826.0     696.0
+
+authorNameInComment
+  false                              823.0     690.0
+  true                                 3.0       6.0
+  [total]                            826.0     696.0
+
+isCommentFromAuthor
+  false                              824.0     694.0
+  true                                 2.0       2.0
+  [total]                            826.0     696.0
+
+commenterNameInComment
+  false                              825.0     693.0
+  true                                 1.0       3.0
+  [total]                            826.0     696.0
+
+numbersInCommenterName
+  mean                              0.1692    0.2806
+  std. dev.                         0.4644    0.7384
+  weight sum                           824       694
+  precision                         0.0202    0.0202
+
+likes
+  mean                             10.1386   29.0741
+  std. dev.                          40.74  101.1943
+  weight sum                           824       694
+  precision                          1.475     1.475
+
+replies
+  mean                              2.0158     3.523
+  std. dev.                         8.5619   13.5593
+  weight sum                           824       694
+  precision                         0.2285    0.2285
+
+daysInterval
+  mean                            186.5951   190.123
+  std. dev.                       391.2706  479.4574
+  weight sum                           824       694
+  precision                         1.5328    1.5328
+
+repeatedWords
+  mean                              1.1078    1.0404
+  std. dev.                         0.3529    0.2052
+  weight sum                           824       694
+  precision                         0.0265    0.0265
+
+mentionTags
+  mean                              0.1157    0.2923
+  std. dev.                           0.43    0.4293
+  weight sum                           824       694
+  precision                          0.027     0.027
+
+hashtags
+  mean                               0.135    0.0308
+  std. dev.                         0.6353    0.1886
+  weight sum                           824       694
+  precision                         0.0656    0.0656
+
+commenterSubscribers
+  mean                            330.2378 2284.9476
+  std. dev.                      1822.855623059.9646
+  weight sum                           824       694
+  precision                        366.733   366.733
+
+videoMomentReference
+  false                              824.0     638.0
+  true                                 2.0      58.0
+  [total]                            826.0     696.0
+
+homePageLink
+  false                              766.0     695.0
+  true                                60.0       1.0
+  [total]                            826.0     696.0
+
+redirectingLink
+  false                              758.0     693.0
+  true                                68.0       3.0
+  [total]                            826.0     696.0
+
+IP
+  false                              825.0     695.0
+  [total]                            825.0     695.0
+
+percentageTitleWordsInComment
+  mean                              1.4082    3.3167
+  std. dev.                         2.2847   10.5884
+  weight sum                           824       694
+  precision                         0.1984    0.1984
+
+percentageTagsInComment
+  mean                              0.2742    5.5156
+  std. dev.                         2.2124  118.6826
+  weight sum                           824       694
+  precision                        12.5502   12.5502
+
+percentageCapsLock
+  mean                             20.7399   12.6095
+  std. dev.                        18.8426   17.5586
+  weight sum                           824       694
+  precision                         0.0967    0.0967
+
+percentageSpellingErrors
+  mean                              13.404     9.585
+  std. dev.                         62.465   17.3157
+  weight sum                           824       694
+  precision                         1.0278    1.0278
+
+blackWords
+  mean                              1.7219    0.5097
+  std. dev.                         1.3605    0.8423
+  weight sum                           824       694
+  precision                           0.01      0.01
+
+
+
+
+Time taken to build model: 0.05 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        1066               70.224  %
+Incorrectly Classified Instances       452               29.776  %
+Kappa statistic                          0.3754
+Mean absolute error                      0.2833
+Root mean squared error                  0.408 
+Relative absolute error                 57.0869 %
+Root relative squared error             81.9046 %
+Coverage of cases (0.95 level)          98.2213 %
+Mean rel. region size (0.95 level)      79.0514 %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,937    0,576    0,659      0,937    0,774      0,428    0,893     0,913     y
+                 0,424    0,063    0,850      0,424    0,565      0,428    0,893     0,852     n
+Weighted Avg.    0,702    0,342    0,746      0,702    0,678      0,428    0,893     0,885     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 772  52 |   a = y
+ 400 294 |   b = n
+
