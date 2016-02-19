@@ -1,0 +1,359 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.meta.Bagging -P 100 -S 1 -num-slots 1 -I 10 -W weka.classifiers.trees.REPTree -- -M 2 -V 0.001 -N 3 -S 1 -L -1 -I 0.0
+Relation:     commentsCSVdefinitivo
+Instances:    450
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+All the base classifiers: 
+
+
+REPTree
+============
+
+blackWords < 1.5
+|   redirectingLink = false : n (250/26) [108/7]
+|   redirectingLink = true : y (9/0) [5/0]
+blackWords >= 1.5
+|   commenterSubscribers < 3 : y (19/1) [21/8]
+|   commenterSubscribers >= 3
+|   |   percentageTitleWordsInComment < 1.58
+|   |   |   percentageSpellingErrors < 0.76 : y (8/0) [5/1]
+|   |   |   percentageSpellingErrors >= 0.76 : n (6/1) [6/2]
+|   |   percentageTitleWordsInComment >= 1.58 : n (8/0) [5/0]
+
+Size of the tree : 11
+
+
+REPTree
+============
+
+redirectingLink = false
+|   blackWords < 1.5
+|   |   commenterSubscribers < 466.5
+|   |   |   daysInterval < 2.84 : n (74/0) [33/4]
+|   |   |   daysInterval >= 2.84
+|   |   |   |   daysInterval < 3.02 : y (5/0) [0/0]
+|   |   |   |   daysInterval >= 3.02
+|   |   |   |   |   percentageCapsLock < 32.5 : n (125/11) [65/2]
+|   |   |   |   |   percentageCapsLock >= 32.5
+|   |   |   |   |   |   percentageCapsLock < 41.5 : y (6/0) [4/1]
+|   |   |   |   |   |   percentageCapsLock >= 41.5 : n (18/4) [6/0]
+|   |   commenterSubscribers >= 466.5
+|   |   |   percentageTagsInComment < 2.38 : y (11/2) [6/2]
+|   |   |   percentageTagsInComment >= 2.38 : n (3/0) [1/0]
+|   blackWords >= 1.5
+|   |   mentionTags < 0.5
+|   |   |   percentageCapsLock < 15.5
+|   |   |   |   percentageTitleWordsInComment < 2.51
+|   |   |   |   |   likes < 1.5
+|   |   |   |   |   |   commenterSubscribers < 12.5
+|   |   |   |   |   |   |   commenterSubscribers < 0.5 : y (3/0) [2/0]
+|   |   |   |   |   |   |   commenterSubscribers >= 0.5
+|   |   |   |   |   |   |   |   daysInterval < 13.85 : n (2/0) [2/0]
+|   |   |   |   |   |   |   |   daysInterval >= 13.85 : y (2/1) [2/0]
+|   |   |   |   |   |   commenterSubscribers >= 12.5 : y (8/0) [4/0]
+|   |   |   |   |   likes >= 1.5 : n (7/1) [2/1]
+|   |   |   |   percentageTitleWordsInComment >= 2.51 : n (8/1) [6/0]
+|   |   |   percentageCapsLock >= 15.5 : y (6/0) [9/1]
+|   |   mentionTags >= 0.5 : n (6/0) [2/0]
+redirectingLink = true : y (16/1) [6/2]
+
+Size of the tree : 31
+
+
+REPTree
+============
+
+redirectingLink = false
+|   blackWords < 0.5 : n (169/14) [92/7]
+|   blackWords >= 0.5
+|   |   percentageTagsInComment < 3.06
+|   |   |   daysInterval < 1306.07
+|   |   |   |   percentageCapsLock < 20
+|   |   |   |   |   likes < 56
+|   |   |   |   |   |   daysInterval < 424.94
+|   |   |   |   |   |   |   percentageCapsLock < 1.5 : y (8/1) [4/0]
+|   |   |   |   |   |   |   percentageCapsLock >= 1.5
+|   |   |   |   |   |   |   |   blackWords < 2.5
+|   |   |   |   |   |   |   |   |   isReply = false
+|   |   |   |   |   |   |   |   |   |   commenterSubscribers < 6.5 : n (11/1) [9/4]
+|   |   |   |   |   |   |   |   |   |   commenterSubscribers >= 6.5
+|   |   |   |   |   |   |   |   |   |   |   likes < 0.5 : n (9/4) [4/0]
+|   |   |   |   |   |   |   |   |   |   |   likes >= 0.5 : y (4/0) [4/1]
+|   |   |   |   |   |   |   |   |   isReply = true : n (15/0) [10/0]
+|   |   |   |   |   |   |   |   blackWords >= 2.5 : y (9/3) [6/1]
+|   |   |   |   |   |   daysInterval >= 424.94 : n (9/0) [4/0]
+|   |   |   |   |   likes >= 56 : n (13/0) [4/0]
+|   |   |   |   percentageCapsLock >= 20 : y (15/3) [5/1]
+|   |   |   daysInterval >= 1306.07 : y (7/0) [2/0]
+|   |   percentageTagsInComment >= 3.06 : n (15/0) [0/0]
+redirectingLink = true : y (16/1) [6/0]
+
+Size of the tree : 25
+
+
+REPTree
+============
+
+blackWords < 1.5
+|   redirectingLink = false
+|   |   percentageCapsLock < 28
+|   |   |   commenterSubscribers < 5.5
+|   |   |   |   percentageSpellingErrors < 26.79 : n (99/0) [49/0]
+|   |   |   |   percentageSpellingErrors >= 26.79
+|   |   |   |   |   daysInterval < 217.47 : n (9/0) [3/0]
+|   |   |   |   |   daysInterval >= 217.47 : y (3/1) [1/0]
+|   |   |   commenterSubscribers >= 5.5
+|   |   |   |   replies < 41.5
+|   |   |   |   |   blackWords < 0.5 : n (52/2) [25/2]
+|   |   |   |   |   blackWords >= 0.5
+|   |   |   |   |   |   commenterSubscribers < 9.5 : y (8/1) [2/0]
+|   |   |   |   |   |   commenterSubscribers >= 9.5 : n (19/2) [10/2]
+|   |   |   |   replies >= 41.5 : y (4/0) [1/1]
+|   |   percentageCapsLock >= 28 : n (44/18) [24/6]
+|   redirectingLink = true : y (9/0) [5/0]
+blackWords >= 1.5
+|   commenterSubscribers < 3 : y (23/1) [14/1]
+|   commenterSubscribers >= 3
+|   |   mentionTags < 0.5
+|   |   |   replies < 3.5
+|   |   |   |   percentageCapsLock < 3 : n (5/1) [3/1]
+|   |   |   |   percentageCapsLock >= 3 : y (9/0) [7/2]
+|   |   |   replies >= 3.5 : n (5/0) [3/0]
+|   |   mentionTags >= 0.5 : n (11/0) [3/0]
+
+Size of the tree : 27
+
+
+REPTree
+============
+
+blackWords < 1.5
+|   redirectingLink = false
+|   |   percentageCapsLock < 33.5
+|   |   |   commenterSubscribers < 8.5 : n (124/1) [62/1]
+|   |   |   commenterSubscribers >= 8.5
+|   |   |   |   blackWords < 0.5 : n (51/4) [30/2]
+|   |   |   |   blackWords >= 0.5
+|   |   |   |   |   daysInterval < 2.54 : n (9/0) [6/0]
+|   |   |   |   |   daysInterval >= 2.54
+|   |   |   |   |   |   commenterSubscribers < 17.5 : y (9/0) [1/0]
+|   |   |   |   |   |   commenterSubscribers >= 17.5 : n (12/3) [4/0]
+|   |   percentageCapsLock >= 33.5
+|   |   |   percentageCapsLock < 37.5 : y (8/1) [1/0]
+|   |   |   percentageCapsLock >= 37.5
+|   |   |   |   commenterSubscribers < 48.5
+|   |   |   |   |   blackWords < 0.5 : n (17/1) [6/2]
+|   |   |   |   |   blackWords >= 0.5 : y (3/1) [1/0]
+|   |   |   |   commenterSubscribers >= 48.5 : y (2/0) [3/1]
+|   redirectingLink = true : y (7/0) [5/0]
+blackWords >= 1.5
+|   percentageCapsLock < 5.5
+|   |   isReply = false
+|   |   |   replies < 1.5
+|   |   |   |   daysInterval < 798.2 : y (9/2) [4/1]
+|   |   |   |   daysInterval >= 798.2 : n (5/1) [1/0]
+|   |   |   replies >= 1.5 : n (6/0) [3/1]
+|   |   isReply = true : n (6/0) [1/0]
+|   percentageCapsLock >= 5.5
+|   |   commenterSubscribers < 5.5 : y (24/0) [13/1]
+|   |   commenterSubscribers >= 5.5
+|   |   |   daysInterval < 9.24 : n (3/0) [4/0]
+|   |   |   daysInterval >= 9.24 : y (5/1) [5/1]
+
+Size of the tree : 33
+
+
+REPTree
+============
+
+redirectingLink = false
+|   blackWords < 0.5 : n (165/12) [74/3]
+|   blackWords >= 0.5
+|   |   percentageCapsLock < 18.5
+|   |   |   blackWords < 2.5 : n (79/13) [47/10]
+|   |   |   blackWords >= 2.5
+|   |   |   |   percentageSpellingErrors < 5.01 : n (6/1) [2/0]
+|   |   |   |   percentageSpellingErrors >= 5.01 : y (10/0) [3/1]
+|   |   percentageCapsLock >= 18.5 : y (23/6) [17/5]
+redirectingLink = true
+|   commenterNameInComment = false : y (15/0) [6/0]
+|   commenterNameInComment = true : n (2/0) [1/0]
+
+Size of the tree : 13
+
+
+REPTree
+============
+
+blackWords < 1.5
+|   redirectingLink = false
+|   |   percentageCapsLock < 30.5
+|   |   |   percentageSpellingErrors < 475
+|   |   |   |   commenterSubscribers < 8.5 : n (110/3) [70/3]
+|   |   |   |   commenterSubscribers >= 8.5
+|   |   |   |   |   percentageCapsLock < 3.5
+|   |   |   |   |   |   replies < 0.5 : n (14/1) [7/0]
+|   |   |   |   |   |   replies >= 0.5 : y (10/2) [3/1]
+|   |   |   |   |   percentageCapsLock >= 3.5
+|   |   |   |   |   |   daysInterval < 17.05 : n (27/0) [14/3]
+|   |   |   |   |   |   daysInterval >= 17.05
+|   |   |   |   |   |   |   daysInterval < 43.03 : y (2/0) [2/0]
+|   |   |   |   |   |   |   daysInterval >= 43.03 : n (24/2) [5/0]
+|   |   |   percentageSpellingErrors >= 475 : y (3/0) [0/0]
+|   |   percentageCapsLock >= 30.5
+|   |   |   commenterSubscribers < 48.5
+|   |   |   |   likes < 0.5 : n (12/0) [12/5]
+|   |   |   |   likes >= 0.5
+|   |   |   |   |   daysInterval < 196.33
+|   |   |   |   |   |   percentageSpellingErrors < 26.79 : n (7/0) [0/0]
+|   |   |   |   |   |   percentageSpellingErrors >= 26.79 : y (2/0) [1/0]
+|   |   |   |   |   daysInterval >= 196.33 : y (3/0) [3/0]
+|   |   |   commenterSubscribers >= 48.5 : y (10/1) [1/0]
+|   redirectingLink = true : y (12/0) [3/0]
+blackWords >= 1.5
+|   percentageSpellingErrors < 9.01
+|   |   commenterSubscribers < 0.5 : y (14/1) [6/0]
+|   |   commenterSubscribers >= 0.5
+|   |   |   percentageSpellingErrors < 2.44
+|   |   |   |   percentageTitleWordsInComment < 0.25 : y (8/1) [2/0]
+|   |   |   |   percentageTitleWordsInComment >= 0.25 : n (8/1) [3/0]
+|   |   |   percentageSpellingErrors >= 2.44 : n (16/0) [8/2]
+|   percentageSpellingErrors >= 9.01 : y (18/0) [10/2]
+
+Size of the tree : 35
+
+
+REPTree
+============
+
+blackWords < 1.5
+|   commenterSubscribers < 162.5
+|   |   redirectingLink = false : n (218/10) [107/9]
+|   |   redirectingLink = true : y (3/0) [4/0]
+|   commenterSubscribers >= 162.5 : n (25/12) [12/3]
+blackWords >= 1.5
+|   percentageCapsLock < 7.5
+|   |   percentageTitleWordsInComment < 0.25
+|   |   |   isReply = false : y (19/3) [9/3]
+|   |   |   isReply = true : n (6/0) [2/0]
+|   |   percentageTitleWordsInComment >= 0.25 : n (7/0) [3/0]
+|   percentageCapsLock >= 7.5
+|   |   likes < 10 : y (20/0) [10/2]
+|   |   likes >= 10 : n (2/0) [3/1]
+
+Size of the tree : 15
+
+
+REPTree
+============
+
+blackWords < 1.5
+|   redirectingLink = false
+|   |   blackWords < 0.5 : n (173/9) [89/11]
+|   |   blackWords >= 0.5
+|   |   |   percentageCapsLock < 29.5 : n (59/8) [26/5]
+|   |   |   percentageCapsLock >= 29.5 : y (8/2) [2/0]
+|   redirectingLink = true : y (12/0) [4/0]
+blackWords >= 1.5
+|   percentageCapsLock < 3.5 : n (11/1) [11/3]
+|   percentageCapsLock >= 3.5
+|   |   commenterSubscribers < 45.5 : y (30/1) [12/4]
+|   |   commenterSubscribers >= 45.5 : n (7/1) [6/0]
+
+Size of the tree : 13
+
+
+REPTree
+============
+
+redirectingLink = false
+|   blackWords < 0.5
+|   |   percentageCapsLock < 11.5 : n (117/2) [54/1]
+|   |   percentageCapsLock >= 11.5
+|   |   |   videoMomentReference = false
+|   |   |   |   hashtags < 2
+|   |   |   |   |   percentageSpellingErrors < 7.88
+|   |   |   |   |   |   percentageCapsLock < 15 : y (7/1) [2/1]
+|   |   |   |   |   |   percentageCapsLock >= 15
+|   |   |   |   |   |   |   percentageCapsLock < 63 : n (13/0) [6/0]
+|   |   |   |   |   |   |   percentageCapsLock >= 63
+|   |   |   |   |   |   |   |   likes < 2.5 : n (4/1) [4/1]
+|   |   |   |   |   |   |   |   likes >= 2.5 : y (2/0) [1/0]
+|   |   |   |   |   percentageSpellingErrors >= 7.88 : n (24/1) [12/0]
+|   |   |   |   hashtags >= 2 : y (2/0) [0/0]
+|   |   |   videoMomentReference = true : n (22/0) [6/0]
+|   blackWords >= 0.5
+|   |   mentionTags < 0.5
+|   |   |   percentageCapsLock < 18
+|   |   |   |   likes < 1.5
+|   |   |   |   |   commenterSubscribers < 5.5 : n (23/3) [14/0]
+|   |   |   |   |   commenterSubscribers >= 5.5
+|   |   |   |   |   |   commenterSubscribers < 17.5 : y (13/2) [8/3]
+|   |   |   |   |   |   commenterSubscribers >= 17.5
+|   |   |   |   |   |   |   commenterSubscribers < 221 : n (11/1) [5/2]
+|   |   |   |   |   |   |   commenterSubscribers >= 221 : y (3/0) [2/0]
+|   |   |   |   likes >= 1.5 : n (11/0) [7/1]
+|   |   |   percentageCapsLock >= 18 : y (18/4) [11/3]
+|   |   mentionTags >= 0.5 : n (17/0) [13/3]
+redirectingLink = true : y (13/0) [5/0]
+
+Size of the tree : 31
+
+
+
+Time taken to build model: 0.2 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         384               85.3333 %
+Incorrectly Classified Instances        66               14.6667 %
+Kappa statistic                          0.5188
+Mean absolute error                      0.2358
+Root mean squared error                  0.3422
+Relative absolute error                 66.6582 %
+Root relative squared error             81.4517 %
+Coverage of cases (0.95 level)          99.3333 %
+Mean rel. region size (0.95 level)      91.8889 %
+Total Number of Instances              450     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,485    0,037    0,794      0,485    0,602      0,542    0,842     0,690     y
+                 0,963    0,515    0,863      0,963    0,910      0,542    0,842     0,934     n
+Weighted Avg.    0,853    0,405    0,847      0,853    0,840      0,542    0,842     0,878     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  50  53 |   a = y
+  13 334 |   b = n
+

@@ -1,0 +1,296 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.meta.AdaBoostM1 -P 100 -S 1 -I 10 -W weka.classifiers.trees.DecisionStump
+Relation:     commentsCSVdefinitivo-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1-weka.filters.supervised.instance.SMOTE-C0-K5-P100.0-S1
+Instances:    1518
+Attributes:   22
+              isReply
+              authorNameInComment
+              isCommentFromAuthor
+              commenterNameInComment
+              numbersInCommenterName
+              likes
+              replies
+              daysInterval
+              repeatedWords
+              mentionTags
+              hashtags
+              commenterSubscribers
+              videoMomentReference
+              homePageLink
+              redirectingLink
+              IP
+              percentageTitleWordsInComment
+              percentageTagsInComment
+              percentageCapsLock
+              percentageSpellingErrors
+              blackWords
+              isSpam
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+AdaBoostM1: Base classifiers and their weights: 
+
+Decision Stump
+
+Classifications
+
+blackWords <= 1.0017180277587676 : n
+blackWords > 1.0017180277587676 : y
+blackWords is missing : y
+
+Class distributions
+
+blackWords <= 1.0017180277587676
+y	n	
+0.34213421342134215	0.6578657865786579	
+blackWords > 1.0017180277587676
+y	n	
+0.8423645320197044	0.15763546798029557	
+blackWords is missing
+y	n	
+0.5428194993412385	0.45718050065876153	
+
+
+Weight: 1.0
+
+Decision Stump
+
+Classifications
+
+percentageCapsLock <= 12.108343618960308 : n
+percentageCapsLock > 12.108343618960308 : y
+percentageCapsLock is missing : y
+
+Class distributions
+
+percentageCapsLock <= 12.108343618960308
+y	n	
+0.4288932166404674	0.5711067833595326	
+percentageCapsLock > 12.108343618960308
+y	n	
+0.8110367470640224	0.18896325293597757	
+percentageCapsLock is missing
+y	n	
+0.6129369693726163	0.3870630306273836	
+
+
+Weight: 0.78
+
+Decision Stump
+
+Classifications
+
+blackWords <= 0.0017513634826556935 : n
+blackWords > 0.0017513634826556935 : y
+blackWords is missing : y
+
+Class distributions
+
+blackWords <= 0.0017513634826556935
+y	n	
+0.3642165436861198	0.6357834563138803	
+blackWords > 0.0017513634826556935
+y	n	
+0.7494088196334671	0.25059118036653305	
+blackWords is missing
+y	n	
+0.6392029220299021	0.36079707797009775	
+
+
+Weight: 0.93
+
+Decision Stump
+
+Classifications
+
+mentionTags <= 0.4476900158114626 : y
+mentionTags > 0.4476900158114626 : n
+mentionTags is missing : y
+
+Class distributions
+
+mentionTags <= 0.4476900158114626
+y	n	
+0.6376983435316601	0.36230165646833995	
+mentionTags > 0.4476900158114626
+y	n	
+0.24410269915125044	0.7558973008487496	
+mentionTags is missing
+y	n	
+0.5571751909010142	0.44282480909898575	
+
+
+Weight: 0.67
+
+Decision Stump
+
+Classifications
+
+homePageLink = false : n
+homePageLink != false : y
+homePageLink is missing : n
+
+Class distributions
+
+homePageLink = false
+y	n	
+0.43275029671272286	0.5672497032872771	
+homePageLink != false
+y	n	
+1.0	0.0	
+homePageLink is missing
+y	n	
+0.45702671273994294	0.5429732872600571	
+
+
+Weight: 0.35
+
+Decision Stump
+
+Classifications
+
+percentageCapsLock <= 6.362384559430616 : n
+percentageCapsLock > 6.362384559430616 : y
+percentageCapsLock is missing : y
+
+Class distributions
+
+percentageCapsLock <= 6.362384559430616
+y	n	
+0.36259956659424303	0.637400433405757	
+percentageCapsLock > 6.362384559430616
+y	n	
+0.6299214537473513	0.3700785462526487	
+percentageCapsLock is missing
+y	n	
+0.5365302951617784	0.4634697048382217	
+
+
+Weight: 0.54
+
+Decision Stump
+
+Classifications
+
+videoMomentReference = false : y
+videoMomentReference != false : n
+videoMomentReference is missing : n
+
+Class distributions
+
+videoMomentReference = false
+y	n	
+0.521708897944218	0.4782911020557819	
+videoMomentReference != false
+y	n	
+0.00908797603103297	0.990912023968967	
+videoMomentReference is missing
+y	n	
+0.4963430037908447	0.5036569962091554	
+
+
+Weight: 0.18
+
+Decision Stump
+
+Classifications
+
+videoMomentReference = true : n
+videoMomentReference != true : n
+videoMomentReference is missing : n
+
+Class distributions
+
+videoMomentReference = true
+y	n	
+0.010862873316989227	0.9891371266830108	
+videoMomentReference != true
+y	n	
+0.4766916070229904	0.5233083929770096	
+videoMomentReference is missing
+y	n	
+0.4555035611358759	0.544496438864124	
+
+
+Weight: 0.18
+
+Decision Stump
+
+Classifications
+
+videoMomentReference = false : y
+videoMomentReference != false : n
+videoMomentReference is missing : n
+
+Class distributions
+
+videoMomentReference = false
+y	n	
+0.5212763119850794	0.47872368801492066	
+videoMomentReference != false
+y	n	
+0.012957680056422078	0.9870423199435779	
+videoMomentReference is missing
+y	n	
+0.4999999999999997	0.5000000000000002	
+
+
+Weight: 0.16
+
+Decision Stump
+
+Classifications
+
+percentageTitleWordsInComment <= 9.978713432950126 : n
+percentageTitleWordsInComment > 9.978713432950126 : n
+percentageTitleWordsInComment is missing : n
+
+Class distributions
+
+percentageTitleWordsInComment <= 9.978713432950126
+y	n	
+0.4817222601352531	0.5182777398647469	
+percentageTitleWordsInComment > 9.978713432950126
+y	n	
+0.01959772301337329	0.9804022769866267	
+percentageTitleWordsInComment is missing
+y	n	
+0.46239148692961807	0.537608513070382	
+
+
+Weight: 0.15
+
+Number of performed Iterations: 10
+
+
+Time taken to build model: 0.05 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        1248               82.2134 %
+Incorrectly Classified Instances       270               17.7866 %
+Kappa statistic                          0.6426
+Mean absolute error                      0.26  
+Root mean squared error                  0.3562
+Relative absolute error                 52.3924 %
+Root relative squared error             71.5015 %
+Coverage of cases (0.95 level)          99.5389 %
+Mean rel. region size (0.95 level)      88.1094 %
+Total Number of Instances             1518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,822    0,177    0,846      0,822    0,834      0,643    0,898     0,910     y
+                 0,823    0,178    0,795      0,823    0,809      0,643    0,898     0,880     n
+Weighted Avg.    0,822    0,178    0,823      0,822    0,822      0,643    0,898     0,896     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 677 147 |   a = y
+ 123 571 |   b = n
+
